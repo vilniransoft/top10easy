@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import AlgoliaSearchBox from "../../Algolia/AlgoliaSearchBox/AlgoliaSearchBox";
 import Dropdown from "../../Utils/Dropdown/Dropdown";
 import Search from "../../Utils/Search/Search";
 
@@ -15,7 +16,7 @@ export default function EzSearchHeader(){
     <div className="relative flex flex-col md:flex-row align-center items-center">
         <Dropdown />
         <div className="flex">
-            <Search />
+            <AlgoliaSearchBox />
         </div>
     </div>
 

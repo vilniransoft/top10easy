@@ -1,22 +1,29 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../imgs/LogoTop10.jpg';
-export default function ResultCard(){
-    return <div className="max-w-sm w-full lg:max-w-full lg:flex rounded-xl shadow-md hover:shadow-xl">
-            <div className="h-48 lg:h-auto lg:w-48 self-center flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" title="Woman holding a mug">
-                <img src={logo} alt="Future Business"/>
+export default function ResultCard(props){
+    const [data, setData] = useState({})
+    const [img, setImg] = useState(logo)
+    useEffect(()=>{
+       setData(props.business)
+       setImg(`https://top10cms.herokuapp.com/media/${props.business?.wagtailimages_image?.file}`)
+    }, [])
+    return <div className="max-w-sm w-full lg:max-w-full lg:flex rounded-xl shadow-md hover:shadow-xl m-4">
+            <div className="h-48 lg:h-auto lg:w-48 self-center flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" >
+                <img className="h-48 w-full object-cover md:w-48" src={img} alt="Future Business"/>
             </div>
             <div className="bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
             <div className="mb-8">
                 <p className="text-sm text-gray-600 flex items-center">
             
                 </p>
-                <Link to={`business/${`preview`}`} className="text-gray-900 font-bold text-xl mb-2">Savory Cupcakes</Link>
-                <p className="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+                <Link to={`business/${`preview`}`} className="text-gray-900 font-bold text-xl mb-2">{data?.wagtailcore_page?.title}</Link>
+                <p className="text-gray-700 text-base">{data?.business_description}</p>
             </div>
             <div className="flex items-center ">
                 <div className="px-2">
                     <button className="bg-gray-200 hover:bg-gray-400 font-bold py-2 px-4 rounded text-black">
-                        <span className="text-black">+1 123 567 8787</span>
+                        <span className="text-black">{data?.contact_phone}</span>
                     </button>
                 </div>
                 <div className="px-2">
