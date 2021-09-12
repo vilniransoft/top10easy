@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import Privacy from './Components/Pages/Privacy/Privacy';
 
 const searchClient = algoliasearch("CP26C79INL", "9d24d11b715d68508e486747a5538700");
+
 function App() {
   const [envars, setEnvars] = useState({})
   //const searchClient = algoliasearch(envars?.index, envars?.searchApiKey);

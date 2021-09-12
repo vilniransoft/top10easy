@@ -6,14 +6,17 @@ import { searchViewState } from "../../../context/appState";
 import { useRecoilState } from "recoil";
 import GoogleMapReact from 'google-map-react';
 import MapBusinessMarker from "../../Utils/MapBusinessMarker/MapBusinessMarker";
+import { connectStats, Stats } from 'react-instantsearch-dom';
 
 const AnyReactComponent = ({ text }) => <div className="bg-white">{text}</div>;
 
 export default function EzSSearch(){   
     const center = useState({lat: 59.95, lng: 30.33})
     const zoom = useState(11)
+    const [allHits, setAllHits] = useState(0)
     const [filterAttr, setFilterAttr] = useState(['business_city', 'business_state'])
     const [viewType, setViewType] = useRecoilState(searchViewState);
+    
 
     useEffect(()=>{
         const resultFacetLabels = document.querySelectorAll('li > label > span.ais-RefinementList-labelText')
@@ -32,6 +35,8 @@ export default function EzSSearch(){
                             </div>
                             
                         })}
+                    
+                       
                     </div>
                     <div  className="result-list-container w-full sm:w-3/4">
                         { (viewType === 'list') ?  <ResultsPage></ResultsPage> : <div style={{ height: '100vh', width: '100%' }}>

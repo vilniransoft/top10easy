@@ -16,7 +16,7 @@ export default function AlgoliaCard(props) {
         const hitItem = document.querySelector('.ais-Hits-item')
         hitItem.classList.add('text-center', 'card-center')
        setData(props.hit)
-       console.log(logo)
+       console.log(props.hit)
        //props.hit?.wagtailimages_image?.file ?? 
        setImg(`${document.location.origin}${logo}`)
     }, [props])
@@ -34,7 +34,7 @@ export default function AlgoliaCard(props) {
         <p className="text-sm text-gray-600 flex items-center">
     
         </p>
-        <Link to={`business/${`preview`}`} className="text-gray-900 font-bold text-xl mb-2"> {props.hit?.wagtailcore_page?.title  ?? "Test Business"}</Link>
+        <Link to={`business/${`preview`}`} className="text-gray-900 font-bold text-xl mb-2"> {props.hit?.title  ?? "Test Business"}</Link>
         <p className="text-gray-700 text-base">{props?.hit?.business_description  ?? lorem}</p>
     </div>
     <div className="flex flex-col md:flex-row items-center ">
