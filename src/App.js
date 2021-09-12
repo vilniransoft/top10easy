@@ -21,6 +21,7 @@ function App() {
     async function getEnVars(){
       const serverRes = await fetch('/envars');
       const envars = await serverRes.json();
+      console.log(envars)
       setEnvars(envars);
     }
     getEnVars();
