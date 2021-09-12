@@ -14,9 +14,6 @@ fastify.register(require('fastify-static'), {
     list: true
 })
 
-fastify.get("/service-worker.js", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "build", "service-worker.js"));
-});
 fastify.get('/envars', (request, reply) => {
     console.log(process.env.SEARCH_INDEX)
     console.log(process.env.SEARCH_API_KEY)
