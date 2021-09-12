@@ -30,7 +30,75 @@
     <title>Top10easy</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>
+      <div class="unsupported">
+          <div class="unsupported_title">LWC app can't be loaded!</div>
+          <div class="unsupported_message">
+              This application requires javascript to work properly.
+          </div>
+      </div>
+  </noscript>
+
+  <div id="outdated" style="display: none">
+      <div class="unsupported">
+          <div class="unsupported_title">App can't be loaded!</div>
+          <div class="unsupported_message"></div>
+      </div>
+  </div>
+
+  <div id="offline-support" style="display: none">
+      <div class="unsupported">
+          <div class="unsupported_title">App can't be loaded!</div>
+          <div class="unsupported_message"></div>
+      </div>
+  </div>
+
+  <script nomodule>
+      const { outdated } = window;
+      outdated.style.display = 'unset';
+      outdated.querySelector('.unsupported_message').textContent =
+          'This application requires a more recent version of your browser';
+  </script>
+
+  <script>
+      if ('serviceWorker' in navigator) {
+
+          window.addEventListener('load', () => {
+              navigator.serviceWorker.register('/sw.js').then(reg => {
+                  console.log('SW registered: ', reg);
+
+                  reg.addEventListener('updatefound', () => {
+                      console.log('an updated service worker has appeared in reg.installing!')
+                      newWorker = reg.installing;
+                      
+                      newWorker.addEventListener('statechange', () => {
+                          console.log(`new state: ${newWorker.state}`);
+                          // Has service worker state changed?
+                          switch (newWorker.state) {
+                              case 'installed':
+
+                                  // There is a new service worker available, show the notification
+                                  if (navigator.serviceWorker.controller) {
+                                      console.log('display notif, new version available')
+                                  }
+
+                                  break;
+                          }
+                      });
+                  });
+              }).catch(registrationError => {
+                  console.log('SW registration failed: ', registrationError);
+              });
+          });
+          
+
+         
+      }
+
+      if (!window.indexedDB) {
+          console.log("Your browser doesn't support a stable version of IndexedDB. Offline Mode will not be available.");
+      }
+  </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.
@@ -42,5 +110,23 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open install-modal" style="display:none" >
+      <div class="slds-modal__container">
+          <header class="slds-modal__header">
+              <img width="100px" src="https://pfdrive.com/wp-content/uploads/2018/07/powerfactors-logo.png" alt="Power Factors" />
+              <span class="slds-m-left_medium slds-text-heading_medium">Digital Inspection Form</span>
+          </header>
+          <div class="slds-modal__content slds-grid">
+              <img src="https://pfdrive.com/wp-content/uploads/2018/08/bg_panels_03.jpg" alt="">
+          </div>
+          <footer class="slds-modal__footer">
+              <button class="slds-button slds-button_outline-brand add-button">Install App</button>
+              <button class="slds-button slds-button_brand cancel-button continue-btn">Continue in Browser</button>
+          </footer>
+      </div>
+  </section>
+  <div class="slds-backdrop slds-backdrop_open install-backdrop" style="display:none"></div>
+
   </body>
 </html>

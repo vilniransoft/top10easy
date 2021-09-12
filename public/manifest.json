@@ -19,6 +19,9 @@
     }
   ],
   "start_url": "https://top-10-easy-demo.herokuapp.com",
+  "Scope": "/",
+  "orientation" : "natural",
+  "categories" : ["finder", "search", "market", "local businesses"],
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
