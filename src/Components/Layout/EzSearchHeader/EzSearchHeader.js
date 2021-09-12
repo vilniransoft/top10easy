@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import AlgoliaSearchBox from "../../Algolia/AlgoliaSearchBox/AlgoliaSearchBox";
 import Dropdown from "../../Utils/Dropdown/Dropdown";
-import Search from "../../Utils/Search/Search";
+import { Configure } from 'react-instantsearch-dom';
+import { useState } from "react";
 
 export default function EzSearchHeader(){
-    return <section className="w-full text-gray-700 bg-gray-100">
+    const [filters, setFilters] = useState('')
+    return <section className="w-full text-gray-700 bg-gray-100">        
+
         <div className="container flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
         <div className="inline-flex items-center ml-5 space-x-6 lg:justify-end cursor-pointer">
             <Link to="/">

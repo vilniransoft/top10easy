@@ -1,5 +1,5 @@
 'use strict'
-
+require('dotenv').config();
 const fastify = require('fastify')({ 
     logger: true,
     ignoreTrailingSlash: true ,
@@ -16,6 +16,16 @@ fastify.register(require('fastify-static'), {
 fastify.setNotFoundHandler((req, res) => {
     res.sendFile('index.html')
   })
+
+fastify.get('/envars', (request, reply) => {
+    console.log(process.env.SEARCH_INDEX)
+    console.log(process.env.SEARCH_API_KEY)
+    const envars = {
+        index:process.env.SEARCH_INDEX,
+        searchApiKey: process.env.SEARCH_API_KEY
+    }
+reply.send(envars)
+})
 fastify.listen(port, "127.0.0.1", (err, address) => {
     if (err) throw err
     fastify.log.info(`server listening on ${address}`)
