@@ -29,7 +29,7 @@ function App() {
   return (
     <Router>
     <div className="App">
-    <InstantSearch searchClient={searchClient} indexName="ezlistings">
+    <InstantSearch searchClient={searchClient} indexName="BusinessesPage">
       <header className="App-header">
         <Navigation></Navigation>
       </header>
