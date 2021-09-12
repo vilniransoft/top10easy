@@ -13,9 +13,6 @@ fastify.register(require('fastify-static'), {
     root: path.join(__dirname, 'build'),
     list: true
 })
-fastify.get("/service-worker.js", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "public", "service-worker.js"));
-  });
 fastify.setNotFoundHandler((req, res) => {
     res.sendFile('index.html')
   })
