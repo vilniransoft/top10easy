@@ -340,10 +340,6 @@
       "sizes": "192x192"
     },
     {
-      "src": "icons/android/android-launchericon-144-144.png",
-      "sizes": "144x144"
-    },
-    {
       "src": "icons/android/android-launchericon-96-96.png",
       "sizes": "96x96"
     },
@@ -404,8 +400,8 @@
       "sizes": "16x16"
     }
   ],
-  "start_url": "https://main.d1ae0lekufrjse.amplifyapp.com",
-  "Scope": "/",
+  "start_url": "/",
+  "scope": "/",
   "orientation" : "natural",
   "categories" : ["finder", "search", "market", "local businesses", "business reviews"],
   "display": "fullscreen",
