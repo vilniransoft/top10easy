@@ -1,6 +1,7 @@
 {
   "short_name": "Top10ez",
   "name": "Top 10 Easy Web Page",
+  "description": "Business search made easy",
   "icons": [
     {
       "src": "icons/windows10/SmallTile.scale-100.png",
@@ -406,7 +407,7 @@
   "start_url": ".",
   "Scope": "/",
   "orientation" : "natural",
-  "categories" : ["finder", "search", "market", "local businesses"],
+  "categories" : ["finder", "search", "market", "local businesses", "business reviews"],
   "display": "fullscreen",
   "theme_color": "#000000",
   "background_color": "#ffffff"
