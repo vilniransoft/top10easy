@@ -6,7 +6,7 @@ import { searchViewState } from "../../../context/appState";
 import { useRecoilState } from "recoil";
 import GoogleMapReact from 'google-map-react';
 import MapBusinessMarker from "../../Utils/MapBusinessMarker/MapBusinessMarker";
-import { connectStats, Stats } from 'react-instantsearch-dom';
+import { connectStateResults  } from 'react-instantsearch-dom';
 
 const AnyReactComponent = ({ text }) => <div className="bg-white">{text}</div>;
 
@@ -17,6 +17,8 @@ export default function EzSSearch(){
     const [filterAttr, setFilterAttr] = useState(['business_city', 'business_state'])
     const [viewType, setViewType] = useRecoilState(searchViewState);
     
+    const StatefullFacets = connectStateResults(Facet);
+    const StatefulResultsPage = connectStateResults(ResultsPage);
 
     useEffect(()=>{
         const resultFacetLabels = document.querySelectorAll('li > label > span.ais-RefinementList-labelText')
@@ -30,15 +32,12 @@ export default function EzSSearch(){
                 <div className="container bg-white flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
                     <div className="hidden lg:flex flex-col self-start">
                         {filterAttr.map(attr => {
-                            return  <div key={attr} className="facet-container shadow-xl mb-4 ml-4 p-8 ">
-                                <Facet field={attr} />
-                            </div>
-                            
+                            return <StatefullFacets field={attr} key={attr}/>
                         })}
                     
                     </div>
                     <div  className="result-list-container w-full sm:w-3/4">
-                        { (viewType === 'list') ?  <ResultsPage></ResultsPage> : <div style={{ height: '100vh', width: '100%' }}>
+                        { (viewType === 'list') ?  <StatefulResultsPage /> : <div style={{ height: '100vh', width: '100%' }}>
                                                                                     <GoogleMapReact
                                                                                     bootstrapURLKeys={{ key: 'AIzaSyByidHzTxTnoSYBmbISOchbRHanQhlMRmM' }}
                                                                                     defaultCenter={{lat: 35.84, lng: -78.78}}
