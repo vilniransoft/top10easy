@@ -18,20 +18,14 @@ function App() {
   const [envars, setEnvars] = useState({})
   //const searchClient = algoliasearch(envars?.index, envars?.searchApiKey);
   useEffect(()=>{
-
     async function getEnVars(){
       const serverRes = await fetch('/envars');
-      const envars = await serverRes.json();
-      console.log(envars)
-      setEnvars(envars);
+      if(serverRes?.ok ?? false){
+        const envars = await serverRes.json();
+        setEnvars(envars);
+      }
     }
-    try{
-      getEnVars();
-    }
-    catch(e){
-      console.log(e)
-    }
-    
+    getEnVars();    
   }, [])
   return (
     <Router>

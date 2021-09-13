@@ -316,7 +316,7 @@
       "sizes": "16x16"
     }
   ],
-  "start_url": "/",
+  "start_url": "https://main.d1ae0lekufrjse.amplifyapp.com/",
   "scope": "/",
   "orientation" : "natural",
   "categories" : ["finder", "search", "market", "local businesses", "business reviews"],
