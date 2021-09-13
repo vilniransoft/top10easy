@@ -25,7 +25,13 @@ function App() {
       console.log(envars)
       setEnvars(envars);
     }
-    getEnVars();
+    try{
+      getEnVars();
+    }
+    catch(e){
+      console.log(e)
+    }
+    
   }, [])
   return (
     <Router>
