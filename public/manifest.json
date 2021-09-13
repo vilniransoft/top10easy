@@ -20,6 +20,30 @@
       "sizes": "142x142"
     },
     {
+      "src": "icons/windows10/SmallTile.scale-400.png",
+      "sizes": "284x284"
+    },
+    {
+      "src": "icons/windows10/Square150x150Logo.scale-100.png",
+      "sizes": "150x150"
+    },
+    {
+      "src": "icons/windows10/Square150x150Logo.scale-125.png",
+      "sizes": "188x188"
+    },
+    {
+      "src": "icons/windows10/Square150x150Logo.scale-150.png",
+      "sizes": "225x225"
+    },
+    {
+      "src": "icons/windows10/Square150x150Logo.scale-200.png",
+      "sizes": "300x300"
+    },
+    {
+      "src": "icons/windows10/Square150x150Logo.scale-400.png",
+      "sizes": "600x600"
+    },
+    {
       "src": "icons/windows10/Wide310x150Logo.scale-100.png",
       "sizes": "310x150"
     },
@@ -40,6 +64,26 @@
       "sizes": "1240x600"
     },
     {
+      "src": "icons/windows10/LargeTile.scale-100.png",
+      "sizes": "310x310"
+    },
+    {
+      "src": "icons/windows10/LargeTile.scale-125.png",
+      "sizes": "388x388"
+    },
+    {
+      "src": "icons/windows10/LargeTile.scale-150.png",
+      "sizes": "465x465"
+    },
+    {
+      "src": "icons/windows10/LargeTile.scale-200.png",
+      "sizes": "620x620"
+    },
+    {
+      "src": "icons/windows10/LargeTile.scale-400.png",
+      "sizes": "1240x1240"
+    },
+    {
       "src": "icons/windows10/Square44x44Logo.scale-100.png",
       "sizes": "44x44"
     },
@@ -56,6 +100,10 @@
       "sizes": "88x88"
     },
     {
+      "src": "icons/windows10/Square44x44Logo.scale-400.png",
+      "sizes": "176x176"
+    },
+    {
       "src": "icons/windows10/StoreLogo.scale-100.png",
       "sizes": "50x50"
     },
@@ -70,6 +118,10 @@
     {
       "src": "icons/windows10/StoreLogo.scale-200.png",
       "sizes": "100x100"
+    },
+    {
+      "src": "icons/windows10/StoreLogo.scale-400.png",
+      "sizes": "200x200"
     },
     {
       "src": "icons/windows10/SplashScreen.scale-100.png",
@@ -148,6 +200,10 @@
       "sizes": "96x96"
     },
     {
+      "src": "icons/windows10/Square44x44Logo.targetsize-256.png",
+      "sizes": "256x256"
+    },
+    {
       "src": "icons/windows10/Square44x44Logo.altform-unplated_targetsize-16.png",
       "sizes": "16x16"
     },
@@ -202,6 +258,10 @@
     {
       "src": "icons/windows10/Square44x44Logo.altform-unplated_targetsize-96.png",
       "sizes": "96x96"
+    },
+    {
+      "src": "icons/windows10/Square44x44Logo.altform-unplated_targetsize-256.png",
+      "sizes": "256x256"
     },
     {
       "src": "icons/windows10/Square44x44Logo.altform-lightunplated_targetsize-16.png",
@@ -260,8 +320,28 @@
       "sizes": "96x96"
     },
     {
+      "src": "icons/windows10/Square44x44Logo.altform-lightunplated_targetsize-256.png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "icons/msteams/msteams-192-192.png",
+      "sizes": "192x192"
+    },
+    {
       "src": "icons/msteams/msteams-silhouette-32-32.png",
       "sizes": "32x32"
+    },
+    {
+      "src": "icons/android/android-launchericon-512-512.png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "icons/android/android-launchericon-192-192.png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icons/android/android-launchericon-144-144.png",
+      "sizes": "144x144"
     },
     {
       "src": "icons/android/android-launchericon-96-96.png",
@@ -288,8 +368,16 @@
       "sizes": "128x128"
     },
     {
+      "src": "icons/firefox/firefox-marketplace-512-512.png",
+      "sizes": "512x512"
+    },
+    {
       "src": "icons/firefox/firefox-marketplace-128-128.png",
       "sizes": "128x128"
+    },
+    {
+      "src": "icons/firefox/firefox-general-256-256.png",
+      "sizes": "256x256"
     },
     {
       "src": "icons/firefox/firefox-general-128-128.png",
@@ -316,7 +404,7 @@
       "sizes": "16x16"
     }
   ],
-  "start_url": "https://main.d1ae0lekufrjse.amplifyapp.com/",
+  "start_url": "https://main.d1ae0lekufrjse.amplifyapp.com",
   "scope": "/",
   "orientation" : "natural",
   "categories" : ["finder", "search", "market", "local businesses", "business reviews"],
