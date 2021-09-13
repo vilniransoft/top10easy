@@ -36,7 +36,6 @@ export default function EzSSearch(){
                             
                         })}
                     
-                       
                     </div>
                     <div  className="result-list-container w-full sm:w-3/4">
                         { (viewType === 'list') ?  <ResultsPage></ResultsPage> : <div style={{ height: '100vh', width: '100%' }}>
