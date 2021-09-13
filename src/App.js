@@ -11,6 +11,7 @@ import Contact from './Components/Pages/Contact/Contact';
 import Business from './Components/Pages/Business/Business';
 import { useEffect, useState } from 'react';
 import Privacy from './Components/Pages/Privacy/Privacy';
+import EzInstallPrompt from './Components/Layout/EzInstallPrompt/EzInstallPrompt';
 
 const searchClient = algoliasearch("CP26C79INL", "9d24d11b715d68508e486747a5538700");
 

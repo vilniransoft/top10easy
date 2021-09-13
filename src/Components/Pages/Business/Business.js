@@ -1,5 +1,3 @@
-import Carousel from "../../Utils/Carousel/Carousel";
-
 export default function Business(){
     const weekHours = [
         {day: 'Monday', hours: '9:00 AM - 10:00 PM'},
