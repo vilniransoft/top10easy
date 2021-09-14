@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../../imgs/LogoTop10.jpg';
 import { searchViewState } from "../../../context/appState";
 import { useRecoilState } from "recoil";
+import Stars from '../../Utils/Stars/Stars';
 
 export default function AlgoliaCard(props) {
     const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
@@ -30,9 +31,12 @@ export default function AlgoliaCard(props) {
     </div>
     <div className="bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div className="mb-8">
-        <p className="text-sm text-gray-600 flex items-center">
+    <p className="text-sm text-gray-600 flex items-center">
         </p>
         <Link to={`business/${`preview`}`} className="text-gray-900 font-bold text-xl mb-2"> {props.hit?.title  ?? "Test Business"}</Link>
+        <div className="text-sm text-gray-600 flex items-center">
+        <Stars stars={props?.hit?.business_stars}/>
+        </div>
         <p className="text-gray-700 text-base">{props?.hit?.business_description  ?? lorem}</p>
     </div>
     <div className="flex flex-col lg:flex-row items-center">

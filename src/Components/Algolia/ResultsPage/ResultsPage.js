@@ -5,7 +5,6 @@ import { connectStateResults  } from 'react-instantsearch-dom';
 
 export default function ResultsPage({ props, searchResults  }){
   const hasResults = searchResults && searchResults.nbHits !== 0;
-  const nbHits = searchResults && searchResults.nbHits;
   const CustomStateResults = connectStateResults(NoResultsFound);
 
     return <div className="container">
@@ -14,7 +13,6 @@ export default function ResultsPage({ props, searchResults  }){
           {
             (hasResults) ? <Hits hitComponent={AlgoliaCard} /> : <CustomStateResults />
           }
-          
           <div className="pagination">
           </div>
         </div>
