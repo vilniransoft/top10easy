@@ -11,6 +11,7 @@ import Contact from './Components/Pages/Contact/Contact';
 import Business from './Components/Pages/Business/Business';
 import { useEffect, useState } from 'react';
 import Privacy from './Components/Pages/Privacy/Privacy';
+import splitbee from '@splitbee/web';
 
 const searchClient = algoliasearch("CP26C79INL", "9d24d11b715d68508e486747a5538700");
 
@@ -25,7 +26,9 @@ function App() {
         setEnvars(envars);
       }
     }
-    getEnVars();    
+    
+    getEnVars(); 
+    splitbee.init()   
   }, [])
   return (
     <Router>
