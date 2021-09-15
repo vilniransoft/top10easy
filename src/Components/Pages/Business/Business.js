@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router"
-import { searchViewState, currentBusinessState } from "../../../context/appState";
+import { useParams } from "react-router"
+import { currentBusinessState } from "../../../context/appState";
 import { useRecoilState } from "recoil";
 import { useBusiness } from "../../../hooks/state";
 import Stars from "../../Utils/Stars/Stars";
@@ -20,7 +20,6 @@ export default function Business(){
     const days = {1: 'Monday', 2:'Tuesday', 3:'Wednesday', 4:'Thursday', 5:'Friday', 6:'Saturday', 7:'Sunday' }
     const [selectedBusiness, setSelectedBusiness] = useRecoilState(currentBusinessState);
     const [workDays, setWorkDays] = useState(weekHours)
-    let location = useLocation();
     let params = useParams()
     useBusiness()
     useEffect(()=>{
@@ -28,15 +27,17 @@ export default function Business(){
             const url = `https://top10ezlistings.herokuapp.com/api/rest/business/${params?.name}`
             const serverRes = await fetch(url)
             const business = await serverRes.json()
+            if(Object.values(business?.businesses_businessespage[0].businesses_businesshoursorderables).length > 0){
+                setWorkDays(Object.values(business?.businesses_businessespage[0]?.businesses_businesshoursorderables).map( hrs => {
+                    return { day: hrs?.businesses_businesshour?.weekday ?? '', 
+                            hours: (!hrs?.businesses_businesshour.closed) ? `${hrs?.businesses_businesshour?.from_hour.substring(0, hrs?.businesses_businesshour?.from_hour?.length - 3) ?? ''} - ${hrs?.businesses_businesshour?.to_hour?.substring(0, hrs?.businesses_businesshour?.to_hour?.length - 3) ?? ''}` : '-- CLOSED --'
+                                }
+                            }))
+            }
             setSelectedBusiness({...business?.businesses_businessespage[0], ...business?.businesses_businessespage[0]?.wagtailcore_page})
+           
         }
-
         getBusiness()
-        setWorkDays(Object.values(selectedBusiness?.businesses_businesshoursorderables).map( hrs => {
-            return { day: hrs?.businesses_businesshour?.weekday, 
-                    hours: `${hrs?.businesses_businesshour?.from_hour.substring(0, hrs?.businesses_businesshour?.from_hour.length - 3)?? ''} - ${hrs?.businesses_businesshour?.to_hour?.substring(0, hrs?.businesses_businesshour?.to_hour.length - 3) ?? ''}`
-                }
-        }))
     }, [])
     
 
@@ -89,30 +90,6 @@ export default function Business(){
             </button>
         </div>
     </div>
-            {/* <div className="flex items-center ">
-                <div className="px-2">
-                    <button className="bg-gray-200 hover:bg-gray-400 font-bold py-2 px-4 rounded text-black">
-                        <span className="text-black">+{selectedBusiness?.business_phone ?? '123656789'}</span>
-                    </button>
-                </div>
-                <div className="px-2">
-                    <button className="flex bg-green-400 hover:bg-green-500 font-bold py-2 px-4 rounded text-white items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                        </svg>
-                        <span className="text-white">Message</span>
-                    </button>
-                </div>
-                <div className="px-2">
-                    <button className="flex bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded text-black items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span className="text-white">Show on map</span>
-                    </button>
-                </div>
-            </div> */}
                     </div>
                 </div>
             </div>
@@ -150,17 +127,17 @@ export default function Business(){
                         <h2 className="m-0 text-xl font-semibold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl">
                             Hours
                         </h2>
-                        <p className="pt-4 pb-8 m-0 leading-7 text-gray-700 border-0 border-gray-300 sm:pr-12 xl:pr-32 lg:text-lg">
-                        <ul className="p-0 m-0 leading-6 border-0 border-gray-300">
-                            { workDays.map( day=>{
-                                return <li className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid cursor-pointer hover:text-green-400">
-                                <span className="inline-flex items-center justify-center w-6 h-6 mr-2"><span className="text-sm font-bold">{days[day.day]}</span></span> 
-                                <span className="ml-24">{(day.colsed)? '--- closed ---':day.hours}</span>
-                            </li>
-                            })}
-                        
-                        </ul>
-                        </p>
+                        <div className="pt-4 pb-8 m-0 leading-7 text-gray-700 border-0 border-gray-300 sm:pr-12 xl:pr-32 lg:text-lg">
+                            <ul className="p-0 m-0 leading-6 border-0 border-gray-300">
+                                { workDays.map( (day, idx)=>{
+                                    return <li key={idx} className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid cursor-pointer hover:text-green-400">
+                                    <span className="inline-flex items-center justify-center w-6 h-6 mr-2"><span className="text-sm font-bold">{days[day.day]}</span></span> 
+                                    <span className="ml-24">{(day.colsed)? '--- closed ---':day.hours}</span>
+                                </li>
+                                })}
+                            
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div className="box-border flex flex-col items-center content-center px-8 mx-auto leading-6 text-black border-0 border-gray-300 border-solid md:flex-row lg:px-16">
