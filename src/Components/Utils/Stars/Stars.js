@@ -3,7 +3,6 @@ import { useEffect } from "react";
 export default function Stars( props ){
   const totalStars = props.stars;
   useEffect(()=>{
-    console.log(totalStars)
   }, [props.stars])
 
     const allStars = () =>{

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../imgs/LogoTop10.jpg';
-import { searchViewState } from "../../../context/appState";
+import { searchViewState, currentBusinessState } from "../../../context/appState";
 import { useRecoilState } from "recoil";
 import Stars from '../../Utils/Stars/Stars';
 
@@ -12,14 +12,16 @@ export default function AlgoliaCard(props) {
     const [data, setData] = useState({})
     const [img, setImg] = useState(logo)
     const [viewType, setViewType] = useRecoilState(searchViewState);
-    
+    const [selectedBusiness, setSelectedBusiness] = useRecoilState(currentBusinessState);
     useEffect(()=>{
         const hitItem = document.querySelector('.ais-Hits-item')
         setData(props.hit)
-        console.log(props.hit)
         //props.hit?.wagtailimages_image?.file ?? 
         setImg(`${document.location.origin}${logo}`)
     }, [props])
+    const updateState = () =>{
+        setSelectedBusiness(data)
+    }
 
     const goToMap =()=>{
         setViewType('map')
@@ -33,7 +35,7 @@ export default function AlgoliaCard(props) {
     <div className="mb-8">
     <p className="text-sm text-gray-600 flex items-center">
         </p>
-        <Link to={`business/${`preview`}`} className="text-gray-900 font-bold text-xl mb-2"> {props.hit?.title  ?? "Test Business"}</Link>
+        <Link to={`business/${props.hit.slug}`} onClick={()=>{updateState()}} className="text-gray-900 font-bold text-xl mb-2"> {props.hit?.title  ?? "Test Business"}</Link>
         <div className="text-sm text-gray-600 flex items-center">
         <Stars stars={props?.hit?.business_stars}/>
         </div>

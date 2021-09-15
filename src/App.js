@@ -12,10 +12,12 @@ import Business from './Components/Pages/Business/Business';
 import { useEffect, useState } from 'react';
 import Privacy from './Components/Pages/Privacy/Privacy';
 import splitbee from '@splitbee/web';
+import { useBusiness } from './hooks/state';
 
 const searchClient = algoliasearch("CP26C79INL", "9d24d11b715d68508e486747a5538700");
 
 function App() {
+  useBusiness()
   const [envars, setEnvars] = useState({})
   //const searchClient = algoliasearch(envars?.index, envars?.searchApiKey);
   useEffect(()=>{

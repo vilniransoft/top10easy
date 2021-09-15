@@ -10,7 +10,6 @@ export default function Dropdown(){
     const [filters, setFilters] = useState('')
     const [options, setOptions] = useState(locationOptions)
     function setActive(e){
-        console.log(e.target.text)
         const updateOptions = options.map( opt =>{
             return {
                 ...opt,
@@ -19,10 +18,8 @@ export default function Dropdown(){
             
         })
         setOptions(updateOptions)
-        console.log(options?.find( opt =>  opt.active === true)?.city)
         setFilters(`has_unpublished_changes:false`)
         document.querySelector('ul.dropdown-menu').blur();
-
     }
     useEffect(()=>{
         
