@@ -1,3 +1,4 @@
+import './Facet.css';
 import { useEffect, useState } from 'react';
 import { RefinementList } from 'react-instantsearch-dom';
 export default function Facet({ props, searchResults  }){

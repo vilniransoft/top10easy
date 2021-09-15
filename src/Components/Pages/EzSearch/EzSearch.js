@@ -21,11 +21,12 @@ export default function EzSSearch(){
     const StatefulResultsPage = connectStateResults(ResultsPage);
 
     useEffect(()=>{
-        const resultFacetLabels = document.querySelectorAll('li > label > span.ais-RefinementList-labelText')
+        console.log('ok')
+        const resultFacetLabels = document.querySelectorAll('span.ais-RefinementList-labelText')
             resultFacetLabels.forEach( label => {
                 label?.classList?.add('mx-4')
         })
-    })
+    }, [])
 
     return <div>
                 <EzSearchHeader />
