@@ -2,15 +2,19 @@ import { Highlight, connectRefinementList } from 'react-instantsearch-dom';
 import splitbee from '@splitbee/web';
 
 
-const RefinementList = ({ items, isFromSearch, refine, searchForItems, createURL, }) => {
-    
+const RefinementList = ({ attribute, items, isFromSearch, refine, searchForItems, createURL, }) => {
+
     const refineList = (e, item) =>{
+        console.log(attribute)
         e.preventDefault();
         console.log(item)
         refine(item.value);
-        splitbee.track("filter", {
-            type: item.value
-          })
+        if(item.value){
+            splitbee.track("filter", {
+                type: item.value,
+                filter: attribute
+            })
+        }
     }
 
     return(
