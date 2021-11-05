@@ -6,16 +6,19 @@ export default function Facet({ props, searchResults  }){
     const hasResults = searchResults && searchResults.nbHits !== 0;
     const nbHits = searchResults && searchResults.nbHits;
     const [attribute, setAttribute] = useState('')
+    const [canSearch, setCanSearch] = useState(false);
     useEffect(()=>{
         setAttribute(props?.field);
+        setCanSearch(props?.searchable)
     }, [])
     
     const selectAttr = (e) =>{
         console.log(e)
     }
     return (hasResults) ? <div className="refinement-container facet-container shadow-xl mb-4 ml-4 p-8">
-                                {/* <RefinementList  attribute={attribute} /> */}
-                                <AlgoliaFacet attribute={attribute} searchable/>
+                                {(canSearch) ? <AlgoliaFacet attribute={attribute} searchable/> 
+                                    : <AlgoliaFacet attribute={attribute}/>}
+                                
                             </div>
                             :
                             <div></div>

@@ -13,25 +13,16 @@ import { useEffect, useState } from 'react';
 import Privacy from './Components/Pages/Privacy/Privacy';
 import splitbee from '@splitbee/web';
 import { useBusiness } from './hooks/state';
+import VideoModal from './Components/Utils/VideoModal/VideoModal';
 
 const searchClient = algoliasearch("CP26C79INL", "9d24d11b715d68508e486747a5538700");
 
 function App() {
   useBusiness()
-  const [envars, setEnvars] = useState({})
-  //const searchClient = algoliasearch(envars?.index, envars?.searchApiKey);
   useEffect(()=>{
-    async function getEnVars(){
-      const serverRes = await fetch('/envars');
-      if(serverRes?.ok ?? false){
-        const envars = await serverRes.json();
-        setEnvars(envars);
-      }
-    }
-    
-    getEnVars(); 
     splitbee.init()   
   }, [])
+
   return (
     <Router>
     <div className="App">
@@ -62,6 +53,7 @@ function App() {
         </Switch>
       </div>
       </InstantSearch>
+      <VideoModal />
       <footer className="bottom-0 w-full">
         <Footer></Footer>
       </footer>

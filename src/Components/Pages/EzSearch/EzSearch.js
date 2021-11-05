@@ -10,11 +10,15 @@ import { connectStateResults  } from 'react-instantsearch-dom';
 
 const AnyReactComponent = ({ text }) => <div className="bg-white">{text}</div>;
 
-export default function EzSSearch(){   
+export default function EzSSearch(){  
+    const searchFacets = [{value: 'business_city', label:'City', searchable: true},
+    {value: 'business_state', label:'State', searchable: true},
+    {value: 'business_price_range', label:'Price Range', searchable: false},
+    {value: 'business_stars', label:'Review Score', searchable: false}] 
     const center = useState({lat: 59.95, lng: 30.33})
     const zoom = useState(11)
     const [allHits, setAllHits] = useState(0)
-    const [filterAttr, setFilterAttr] = useState(['business_city', 'business_state'])
+    const [filterAttr, setFilterAttr] = useState(searchFacets);
     const [viewType, setViewType] = useRecoilState(searchViewState);
     
     const StatefullFacets = connectStateResults(Facet);
@@ -33,7 +37,7 @@ export default function EzSSearch(){
                 <div className="container bg-white flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
                     <div className="hidden lg:flex flex-col self-start">
                         {filterAttr.map(attr => {
-                            return <StatefullFacets field={attr} key={attr}/>
+                            return <StatefullFacets field={attr.value} key={attr.value} searchable={attr.searchable}/>
                         })}
                     
                     </div>

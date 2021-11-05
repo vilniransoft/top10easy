@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../imgs/LogoTop10.jpg';
-import { searchViewState, currentBusinessState } from "../../../context/appState";
+import { searchViewState, currentBusinessState, currentVideoModalState } from "../../../context/appState";
 import { useRecoilState } from "recoil";
 import Stars from '../../Utils/Stars/Stars';
 
@@ -12,13 +12,17 @@ export default function AlgoliaCard(props) {
     const [data, setData] = useState({})
     const [img, setImg] = useState(logo)
     const [viewType, setViewType] = useRecoilState(searchViewState);
+    const [videoPrev, setVideoPrev] = useRecoilState(currentVideoModalState)
     const [selectedBusiness, setSelectedBusiness] = useRecoilState(currentBusinessState);
+
     useEffect(()=>{
+        console.log(props)
         const hitItem = document.querySelector('.ais-Hits-item')
         setData(props.hit)
         //props.hit?.wagtailimages_image?.file ?? 
         setImg(`${document.location.origin}${logo}`)
     }, [props])
+
     const updateState = () =>{
         setSelectedBusiness(data)
     }
@@ -27,15 +31,25 @@ export default function AlgoliaCard(props) {
         setViewType('map')
     }
 
+    const displayVideo = () =>{
+        setVideoPrev({open:true, link: props?.hit?.video_url})
+    }
+
     return  <div className="max-w-sm lg:max-w-full lg:flex rounded-xl shadow-md hover:shadow-xl m-4">
     <div className="h-48 lg:h-auto lg:w-48 self-center flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" >
         <img className="h-48 w-full lg:w-48 object-cover" src={img} alt="Future Business"/>
+        { props?.hit?.video_url ? <button className="absolute -m-40 sm:-mt-40 lg:-ml-20 cursor-pointer bg-white rounded-full shadow-md over:shadow-xl m-4" onClick={() => displayVideo()}>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-green-500 hover:text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </button> : null}
     </div>
     <div className="bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div className="mb-8">
     <p className="text-sm text-gray-600 flex items-center">
         </p>
-        <Link to={`business/${props.hit.slug}`} onClick={()=>{updateState()}} className="text-gray-900 font-bold text-xl mb-2"> {props.hit?.title  ?? "Test Business"}</Link>
+        <Link data-splitbee-event="Business Link" data-splitbee-event-type={props.hit.slug} to={`business/${props.hit.slug}`} onClick={()=>{updateState()}} className="text-gray-900 font-bold text-xl mb-2"> {props.hit?.title  ?? "Test Business"}</Link>
         <div className="text-sm text-gray-600 flex items-center">
         <Stars stars={props?.hit?.business_stars}/>
         </div>

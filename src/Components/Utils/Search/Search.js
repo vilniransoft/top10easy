@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useHistory } from "react-router";
+import splitbee from '@splitbee/web';
 
 export default function Search(){
     const history = useHistory('');
@@ -13,6 +14,9 @@ export default function Search(){
         const target = event?.target?.name ?? '';
         if (event.keyCode === 13 || target === 'submit') {
             history.push(`search?q=${query}`);
+            splitbee.track(`query`, {
+                type: query
+            })
           }
     }
 

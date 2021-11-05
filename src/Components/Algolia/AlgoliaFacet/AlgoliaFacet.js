@@ -5,25 +5,23 @@ import splitbee from '@splitbee/web';
 const RefinementList = ({ attribute, items, isFromSearch, refine, searchForItems, createURL, }) => {
 
     const refineList = (e, item) =>{
-        console.log(attribute)
         e.preventDefault();
-        console.log(item)
         refine(item.value);
-        if(item.value){
-            splitbee.track("filter", {
-                type: item.value,
-                filter: attribute
+        if(item.value.length > 0){
+            splitbee.track(`${attribute}_filter`, {
+                type: item.value
             })
         }
     }
 
     return(
     <ul>
+        <li className="capitalize">{`${attribute.replace('business_', '').replace('_', ' ')}`}</li>
       <li>
-        <input
+        {/* <input
           type="search"
           onChange={event => searchForItems(event.currentTarget.value)}
-        />
+        /> */}
       </li>
       {items.map(item => (
         <li key={item.label}>
