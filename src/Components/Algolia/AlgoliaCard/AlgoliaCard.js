@@ -16,7 +16,6 @@ export default function AlgoliaCard(props) {
     const [selectedBusiness, setSelectedBusiness] = useRecoilState(currentBusinessState);
 
     useEffect(()=>{
-        console.log(props)
         const hitItem = document.querySelector('.ais-Hits-item')
         setData(props.hit)
         //props.hit?.wagtailimages_image?.file ?? 

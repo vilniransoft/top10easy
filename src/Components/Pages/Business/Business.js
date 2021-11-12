@@ -24,9 +24,11 @@ export default function Business(){
     useBusiness()
     useEffect(()=>{
         async function getBusiness(){
-            const url = `https://top10ezlistings.herokuapp.com/api/rest/business/${params?.name}`
+            // the url is temporary need to change once certs have been properly configured
+            const url = `http://ec2-3-84-109-9.compute-1.amazonaws.com:8000/api/v2/pages/?fields=*&type=businesses.BusinessesPage&slug=${params?.name}`
             const serverRes = await fetch(url)
             const business = await serverRes.json()
+            console.log(business)
             if(Object.values(business?.businesses_businessespage[0].businesses_businesshoursorderables).length > 0){
                 setWorkDays(Object.values(business?.businesses_businessespage[0]?.businesses_businesshoursorderables).map( hrs => {
                     return { day: hrs?.businesses_businesshour?.weekday ?? '', 

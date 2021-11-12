@@ -7,6 +7,7 @@ import { useRecoilState } from "recoil";
 import GoogleMapReact from 'google-map-react';
 import MapBusinessMarker from "../../Utils/MapBusinessMarker/MapBusinessMarker";
 import { connectStateResults  } from 'react-instantsearch-dom';
+import GeoResultsPage from "../../Algolia/GeoResultsPage/GeoResultsPage";
 
 const AnyReactComponent = ({ text }) => <div className="bg-white">{text}</div>;
 
@@ -23,6 +24,7 @@ export default function EzSSearch(){
     
     const StatefullFacets = connectStateResults(Facet);
     const StatefulResultsPage = connectStateResults(ResultsPage);
+    const StatefulGeoResultsPage = connectStateResults(GeoResultsPage);
 
     useEffect(()=>{
         console.log('ok')
@@ -42,20 +44,7 @@ export default function EzSSearch(){
                     
                     </div>
                     <div  className="result-list-container w-full sm:w-3/4">
-                        { (viewType === 'list') ?  <StatefulResultsPage /> : <div style={{ height: '100vh', width: '100%' }}>
-                                                                                    <GoogleMapReact
-                                                                                    bootstrapURLKeys={{ key: 'AIzaSyByidHzTxTnoSYBmbISOchbRHanQhlMRmM' }}
-                                                                                    defaultCenter={{lat: 35.84, lng: -78.78}}
-                                                                                    defaultZoom={11} 
-                                                                                    >
-                                                                                    {/* <AnyReactComponent
-                                                                                        lat={ 35.84}
-                                                                                        lng={-78.78}
-                                                                                        text="Business Name"
-                                                                                    /> */}
-                                                                                    <MapBusinessMarker lat={35.84} lng={-78.78} name="Business Name" color="blue" />
-                                                                                    </GoogleMapReact>
-                                                                                </div> }
+                        { (viewType === 'list') ?  <StatefulResultsPage /> : <StatefulGeoResultsPage /> }
                         
                     </div>
                 </div>
