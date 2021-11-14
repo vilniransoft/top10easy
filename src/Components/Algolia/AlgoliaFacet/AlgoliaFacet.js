@@ -1,6 +1,7 @@
+import { useEffect } from 'react'
 import { Highlight, connectRefinementList } from 'react-instantsearch-dom';
 import splitbee from '@splitbee/web';
-
+import { BsCurrencyDollar } from "react-icons/bs";
 
 const RefinementList = ({ attribute, items, isFromSearch, refine, searchForItems, createURL, }) => {
 
@@ -14,6 +15,17 @@ const RefinementList = ({ attribute, items, isFromSearch, refine, searchForItems
         }
     }
 
+    const label = (item) =>{
+      if(attribute === 'business_price_range'){
+        return <div className="flex flex-row">{generateDollarOptions(Number(item.label))}</div>
+      }
+      return item.label
+    }
+    const generateDollarOptions = (length) => {
+      return [...Array(length).keys()].map(i => {
+          return <BsCurrencyDollar className="text-yellow-400"/>
+      });
+  }
     return(
     <ul>
         <li className="capitalize">{`${attribute.replace('business_', '').replace('_', ' ')}`}</li>
@@ -29,13 +41,14 @@ const RefinementList = ({ attribute, items, isFromSearch, refine, searchForItems
             href={createURL(item.value)}
             style={{ fontWeight: item.isRefined ? 'bold' : '' }}
             onClick={(e) => refineList(e, item)}
+            className="flex justify-between items-center hover:text-green-400"
           >
             {isFromSearch ? (
               <Highlight attribute="label" hit={item} />
             ) : (
-              item.label
+              <span>{label(item)}</span>
             )}{' '}
-            ({item.count})
+            <span>({item.count})</span>
           </a>
         </li>
       ))}

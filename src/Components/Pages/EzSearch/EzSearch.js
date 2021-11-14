@@ -4,14 +4,10 @@ import Facet from "../../Algolia/Facet/Facet";
 import { useEffect, useState } from "react";
 import { searchViewState } from "../../../context/appState";
 import { useRecoilState } from "recoil";
-import GoogleMapReact from 'google-map-react';
-import MapBusinessMarker from "../../Utils/MapBusinessMarker/MapBusinessMarker";
 import { connectStateResults  } from 'react-instantsearch-dom';
 import GeoResultsPage from "../../Algolia/GeoResultsPage/GeoResultsPage";
 
-const AnyReactComponent = ({ text }) => <div className="bg-white">{text}</div>;
-
-export default function EzSSearch(){  
+export default function EzSSearch({searchClient}){  
     const searchFacets = [{value: 'business_city', label:'City', searchable: true},
     {value: 'business_state', label:'State', searchable: true},
     {value: 'business_price_range', label:'Price Range', searchable: false},
@@ -27,7 +23,7 @@ export default function EzSSearch(){
     const StatefulGeoResultsPage = connectStateResults(GeoResultsPage);
 
     useEffect(()=>{
-        console.log('ok')
+        console.log('ok')        
         const resultFacetLabels = document.querySelectorAll('span.ais-RefinementList-labelText')
             resultFacetLabels.forEach( label => {
                 label?.classList?.add('mx-4')

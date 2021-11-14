@@ -11,14 +11,11 @@ import MapBusinessMarker from '../../Utils/MapBusinessMarker/MapBusinessMarker';
 import { GoogleMapsLoader, GeoSearch, Control, Marker } from 'react-instantsearch-dom-maps';
 
 export default function GeoResultsPage({ props, searchResults  }){
-  const ggApiKey = 'AIzaSyByidHzTxTnoSYBmbISOchbRHanQhlMRmM' //'AIzaSyAD94ZQ3SMLuCcoB9SkSMxJARK9dVb2hdI'; //
+  const ggApiKey = 'AIzaSyByidHzTxTnoSYBmbISOchbRHanQhlMRmM';
     const center = useState({lat: 59.95, lng: 30.33})
     const zoom = useState(11)
-    const hasResults = searchResults && searchResults.nbHits !== 0;
-    const CustomStateResults = connectStateResults(NoResultsFound);
-    const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-    return (<div style={{ height: 500 }}>
+return (<div style={{ height: 500 }}>
           <GoogleMapsLoader apiKey={ggApiKey}>
                 {(google) => (
                   <GeoSearch google={google} initialZoom={8} >
