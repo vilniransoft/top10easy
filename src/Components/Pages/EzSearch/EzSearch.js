@@ -23,7 +23,6 @@ export default function EzSSearch({searchClient}){
     const StatefulGeoResultsPage = connectStateResults(GeoResultsPage);
 
     useEffect(()=>{
-        console.log('ok')        
         const resultFacetLabels = document.querySelectorAll('span.ais-RefinementList-labelText')
             resultFacetLabels.forEach( label => {
                 label?.classList?.add('mx-4')
