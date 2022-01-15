@@ -8,6 +8,16 @@ export const searchViewState = atom({
     default: 'list',
     effects_UNSTABLE: [persistAtom],
   });
+export const searchQueryState = atom({
+    key: 'searchQueryState',
+    default: {
+      query: '',
+      refinementList: {
+        },
+    },
+    effects_UNSTABLE: [persistAtom],
+  });
+
 export const currentBusinessState = atom({
     key: 'currentBusinessState',
     default: {},

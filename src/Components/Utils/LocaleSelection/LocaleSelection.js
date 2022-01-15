@@ -30,7 +30,7 @@ export default function LocaleSelection(){
      },[selectedLocale])
 
      return (
-        <div className="w-24 top-16">
+        <div className="w-18 top-16">
           <Listbox value={selectedLocale} onChange={setSelectedLocale}>
             <div className="relative mt-1">
               <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
@@ -54,7 +54,7 @@ export default function LocaleSelection(){
                       key={idx}
                       className={({ active }) =>
                         `${active ? 'text-amber-900 bg-amber-100' : 'text-gray-900'}
-                              cursor-default select-none relative py-2 pl-4pr-4`
+                              cursor-default select-none relative py-2 pl-4 pr-4`
                       }
                       value={locale}
                     >
@@ -72,9 +72,8 @@ export default function LocaleSelection(){
                               className={`${
                                 active ? 'text-amber-600' : 'text-amber-600'
                               }
-                                    absolute inset-y-0 left-0 flex items-center pl-3`}
+                                    absolute inset-y-0 left-0 flex items-center pl-4`}
                             >
-                              
                             </span>
                           ) : null}
                         </>

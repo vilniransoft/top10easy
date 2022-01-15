@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router"
-import { currentBusinessState } from "../../../context/appState";
-import { useRecoilState } from "recoil";
+import { currentBusinessState, localeState } from "../../../context/appState";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useBusiness } from "../../../hooks/state";
 import Stars from "../../Utils/Stars/Stars";
 import GoogleMapReact from 'google-map-react';
@@ -19,13 +19,15 @@ const weekHours = [
 export default function Business(){
     const days = {1: 'Monday', 2:'Tuesday', 3:'Wednesday', 4:'Thursday', 5:'Friday', 6:'Saturday', 7:'Sunday' }
     const [selectedBusiness, setSelectedBusiness] = useRecoilState(currentBusinessState);
+    const currentLocale = useRecoilValue(localeState)
     const [workDays, setWorkDays] = useState(weekHours)
-    let params = useParams()
+    let params = useParams();
+
     useBusiness()
     useEffect(()=>{
         async function getBusiness(){
             // the url is temporary need to change once certs have been properly configured
-            const url = `http://ec2-3-84-109-9.compute-1.amazonaws.com:8000/api/v2/pages/?fields=*&type=businesses.BusinessesPage&slug=${params?.name}`
+            const url = `http://ec2-3-84-109-9.compute-1.amazonaws.com:8000/api/v2/pages/?fields=*&type=businesses.BusinessesPage&slug=${params?.name}&locale=${currentLocale}`
             const serverRes = await fetch(url)
             const business = await serverRes.json()
             console.log(business)
@@ -40,8 +42,7 @@ export default function Business(){
            
         }
         getBusiness()
-    }, [])
-    
+    }, [currentLocale])   
 
     const getStars = ()=>{
         return (selectedBusiness?.business_stars) ? <Stars stars={selectedBusiness?.business_stars}/> :''

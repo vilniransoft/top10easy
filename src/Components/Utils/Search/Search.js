@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import { useHistory } from "react-router";
 import splitbee from '@splitbee/web';
-import { useRecoilValue } from "recoil";
-import { localeState } from "../../../context/appState";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { localeState, searchQueryState } from "../../../context/appState";
 import locales from "../../../locales/locales";
 
 export default function Search(){
@@ -10,6 +10,7 @@ export default function Search(){
     const [query, setQuery] = useState('');
     const currentLocale = useRecoilValue(localeState)
     const [searchText, setSearchText] = useState(locales[currentLocale]?.utils?.search)
+    const [queryState, setQueryState] = useRecoilState(searchQueryState)
 
     useEffect(() => {
         setSearchText(locales[currentLocale]?.utils?.search)
@@ -17,6 +18,8 @@ export default function Search(){
 
     const handleQueryChange = (event) =>{
         setQuery(event.target.value);
+        const updateQueryState = {...queryState, query: event.target.value }
+        setQueryState(updateQueryState)
     }
 
     const handleSearch = (event) =>{

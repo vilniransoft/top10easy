@@ -1,8 +1,12 @@
 import { useEffect } from 'react';
 import { SearchBox } from 'react-instantsearch-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { searchQueryState } from '../../../context/appState';
 import './AlgoliaSearchBox.css';
 
 export default function AlgoliaSearchBox(){
+    const [queryState, setQuerystate] = useRecoilState(searchQueryState)
+
     useEffect(()=>{
         const instaSearchForm = document.querySelector('.ais-SearchBox-form')
         const instaSearch = document.querySelector('.ais-SearchBox-input')
@@ -15,7 +19,11 @@ export default function AlgoliaSearchBox(){
         "text-sm", "focus:outline-none", "w-full", "px-0")
     },[])
     return <div className="pt-2 relative mx-auto text-gray-600 w-full">
-                <SearchBox className="" translations={{ placeholder: '',}} />
+                <SearchBox className="" translations={{ placeholder: '',}} 
+                            onReset={event => { console.log(event.currentTarget);  }}
+                            onClick={event => { console.log(event.currentTarget); }}
+                            defaultRefinement={queryState.query}
+                            />
             </div>
            
 }
