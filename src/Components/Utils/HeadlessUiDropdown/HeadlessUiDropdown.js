@@ -24,6 +24,7 @@ export default function HeadlessUiDropdown() {
       }})
       const businessUniqueLabel = [...new Map(businessLocations.map(item =>
         [item['label'], item])).values()];
+        console.log(businessUniqueLabel)
         setSelected(businessUniqueLabel[0])
         setLocations(businessUniqueLabel);
         
