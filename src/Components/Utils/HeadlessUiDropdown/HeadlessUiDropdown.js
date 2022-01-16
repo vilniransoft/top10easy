@@ -14,7 +14,9 @@ export default function HeadlessUiDropdown() {
     async function loadLocations(){
       const url = "http://ec2-3-84-109-9.compute-1.amazonaws.com:8000/api/v2/pages/?fields=business_country,business_city,business_state&type=businesses.BusinessesPage"
       const serverRes = await fetch(url)
+      console.log(serverRes)
       const business = await serverRes.json()
+      console.log(business)
       const businessLocations = business?.items.map( loc => { return {
         label: `${loc?.business_city}, ${loc?.business_state}`,
         country: loc?.business_country,
