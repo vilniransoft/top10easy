@@ -8,7 +8,30 @@ const locationOptions = [
     {label: 'San Francisco, CA', country: 'united states', city: 'San Francisco', state: 'California', stateAb: 'CA', active: false}
 ]
 export default function HeadlessUiDropdown() {
-  const [selected, setSelected] = useState(locationOptions[0])
+  const [selected, setSelected] = useState([])
+  const [locations, setLocations] = useState([])
+  useEffect(()=>{
+    async function loadLocations(){
+      const url = "http://ec2-3-84-109-9.compute-1.amazonaws.com:8000/api/v2/pages/?fields=business_country,business_city,business_state&type=businesses.BusinessesPage"
+      const serverRes = await fetch(url)
+      const business = await serverRes.json()
+      const businessLocations = business?.items.map( loc => { return {
+        label: `${loc?.business_city}, ${loc?.business_state}`,
+        country: loc?.business_country,
+        city: loc?.business_city,
+        state: '',
+        stateAb: loc?.business_state
+      }})
+      const businessUniqueLabel = [...new Map(businessLocations.map(item =>
+        [item['label'], item])).values()];
+        setSelected(businessUniqueLabel[0])
+        setLocations(businessUniqueLabel);
+        
+    }
+    loadLocations()
+
+  },[])
+
     useEffect(()=>{
         console.log(selected)
         splitbee.track(`city_filter`, {
@@ -45,7 +68,7 @@ export default function HeadlessUiDropdown() {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {locationOptions.map((place, placeIdx) => (
+              {locations.map((place, placeIdx) => (
                 <Listbox.Option
                   key={placeIdx}
                   className={({ active }) =>

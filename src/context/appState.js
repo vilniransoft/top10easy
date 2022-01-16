@@ -8,6 +8,11 @@ export const searchViewState = atom({
     default: 'list',
     effects_UNSTABLE: [persistAtom],
   });
+  export const searchLocationState = atom({
+    key: 'searchLocationState',
+    default: '{country: \'\', state: \'\', city: \'\'}',
+    effects_UNSTABLE: [persistAtom],
+  });
 export const searchQueryState = atom({
     key: 'searchQueryState',
     default: {
