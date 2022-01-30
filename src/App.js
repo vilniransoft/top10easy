@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { InstantSearch } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch/lite';
 import Navigation from './Components/Layout/Navigation/Navigation';
@@ -12,45 +12,33 @@ import Business from './Components/Pages/Business/Business';
 import { useEffect, useState } from 'react';
 import Privacy from './Components/Pages/Privacy/Privacy';
 import splitbee from '@splitbee/web';
-import { useBusiness } from './hooks/state';
+import { useBusiness, useScrollTop } from './hooks/state';
 import VideoModal from './Components/Utils/VideoModal/VideoModal';
 
 const searchClient = algoliasearch("CP26C79INL", "9d24d11b715d68508e486747a5538700");
 
 function App() {
   useBusiness()
+  useScrollTop()
   useEffect(()=>{
     splitbee.init()   
   }, [])
 
   return (
-    <Router>
     <div className="App">
     <InstantSearch searchClient={searchClient} indexName="BusinessesPage">
       <header className="App-header">
         <Navigation></Navigation>
       </header>
       <div className="main">
-      <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/about">
-            <About/>
-          </Route>
-          <Route path="/contact">
-            <Contact />
-          </Route>
-          <Route path="/privacy">
-            <Privacy />
-          </Route>
-          <Route path="/search">
-            <EzSearch />
-          </Route>
-          <Route path="/business/:name">
-            <Business />
-          </Route>
-        </Switch>
+      <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/about" element={<About/>} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/search" element={<EzSearch />} />
+          <Route path="/business/:name" element={<Business />} />
+        </Routes>
       </div>
       </InstantSearch>
       <VideoModal />
@@ -58,7 +46,6 @@ function App() {
         <Footer></Footer>
       </footer>
     </div>
-    </Router>
   );
 }
 

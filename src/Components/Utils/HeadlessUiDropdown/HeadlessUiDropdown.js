@@ -12,17 +12,19 @@ export default function HeadlessUiDropdown() {
   const [locations, setLocations] = useState([])
   useEffect(()=>{
     async function loadLocations(){
-      const url = "http://ec2-3-84-109-9.compute-1.amazonaws.com:8000/api/v2/pages/?fields=business_country,business_city,business_state&type=businesses.BusinessesPage"
-      const serverRes = await fetch(url)
-      console.log(serverRes)
-      const business = await serverRes.json()
+      const origin = (document.location.origin.includes('localhost')) ? 'http:localhost:8000' : 'http://ec2-3-84-109-9.compute-1.amazonaws.com:8000';
+      const path = '/api/v2/pages/?fields=_city_state_abbr,_city,_city_state,_country&type=businesses.BusinessesPage'
+      const url = `${origin}${path}`
+      const serverRes = await fetch(url);
+      const business = await serverRes.json();
+      console.log("========================business")
       console.log(business)
       const businessLocations = business?.items.map( loc => { return {
-        label: `${loc?.business_city}, ${loc?.business_state}`,
-        country: loc?.business_country,
-        city: loc?.business_city,
-        state: '',
-        stateAb: loc?.business_state
+        label: `${loc?._city_state_abbr}`,
+        country: loc?._country,
+        city: loc?._city,
+        state: loc?._city_state,
+        stateAb: loc?._city_state
       }})
       const businessUniqueLabel = [...new Map(businessLocations.map(item =>
         [item['label'], item])).values()];
@@ -31,6 +33,7 @@ export default function HeadlessUiDropdown() {
         setLocations(businessUniqueLabel);
         
     }
+    console.log('loading locations')
     loadLocations()
 
   },[])

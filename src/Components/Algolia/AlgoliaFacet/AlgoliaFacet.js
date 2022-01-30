@@ -3,7 +3,7 @@ import { Highlight, connectRefinementList } from 'react-instantsearch-dom';
 import splitbee from '@splitbee/web';
 import { BsCurrencyDollar } from "react-icons/bs";
 
-const RefinementList = ({ attribute, items, isFromSearch, refine, searchForItems, createURL, }) => {
+const RefinementList = ({ attribute, items, isFromSearch, refine, searchForItems, createURL}) => {
 
     const refineList = (e, item) =>{
         e.preventDefault();
@@ -28,7 +28,7 @@ const RefinementList = ({ attribute, items, isFromSearch, refine, searchForItems
   }
     return(
     <ul>
-        <li className="capitalize">{`${attribute.replace('business_', '').replace('_', ' ')}`}</li>
+        <li className="capitalize">{`${attribute.replace('_city_', '').replace('_', ' ')}`}</li>
       <li>
         {/* <input
           type="search"

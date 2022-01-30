@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react"
-import { useHistory } from "react-router";
+import { useNavigate  } from "react-router";
 import splitbee from '@splitbee/web';
 import { useRecoilValue, useRecoilState } from "recoil";
 import { localeState, searchQueryState } from "../../../context/appState";
 import locales from "../../../locales/locales";
 
 export default function Search(){
-    const history = useHistory('');
+    const navigate = useNavigate('');
     const [query, setQuery] = useState('');
     const currentLocale = useRecoilValue(localeState)
     const [searchText, setSearchText] = useState(locales[currentLocale]?.utils?.search)
@@ -25,7 +25,7 @@ export default function Search(){
     const handleSearch = (event) =>{
         const target = event?.target?.name ?? '';
         if (event.keyCode === 13 || target === 'submit') {
-            history.push(`search?q=${query}`);
+            navigate(`search?q=${query}`);
             splitbee.track(`query`, {
                 type: query
             })

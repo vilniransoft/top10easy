@@ -25,7 +25,7 @@ export default function LocaleSelection(){
      },[availableLocales])
 
      useEffect(() => {
-         const currentLocale = selectedLocale?.name
+        const currentLocale = selectedLocale?.name ?? 'en'
         setLocString(currentLocale)
      },[selectedLocale])
 

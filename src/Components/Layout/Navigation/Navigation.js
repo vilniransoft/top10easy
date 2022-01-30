@@ -28,9 +28,6 @@ return  <section className="w-full px-8 text-gray-700 bg-white border-b-2 shadow
                     <Link to="/contact" className="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">{labels?.aboutUs}</Link>
                 </nav>
                 <div className="inline-flex items-center w-80 self-center space-x-6 justify-center lg:justify-end">
-                    <Link to="/contact" className="fixed bottom-0 mb-2 animate-bounce  bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent flex-nowrap rounded-lg">
-                        {labels?.submitBis}
-                    </Link>
                     <LocaleSelection />
                 </div>
               
