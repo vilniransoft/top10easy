@@ -12,10 +12,12 @@ export default function HeadlessUiDropdown() {
   const [locations, setLocations] = useState([])
   useEffect(()=>{
     async function loadLocations(){
-      const origin = (document.location.origin.includes('localhost')) ? 'http:localhost:8000' : 'http://ec2-3-84-109-9.compute-1.amazonaws.com:8000';
-      const path = '/api/v2/pages/?fields=_city_state_abbr,_city,_city_state,_country&type=businesses.BusinessesPage'
+      const origin = (document.location.origin.includes('localhost')) ? 'http://localhost:8000' : 'http://ec2-3-84-109-9.compute-1.amazonaws.com:8000';
+      const path = '/api/v2/locations/?fields=*'
       const url = `${origin}${path}`
+      console.log(url)
       const serverRes = await fetch(url);
+      console.log(serverRes)
       const business = await serverRes.json();
       console.log("========================business")
       console.log(business)

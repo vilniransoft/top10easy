@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { currentBusinessState } from '../context/appState';
-//import { useNavigate  } from "react-router-dom";
+import { useLocation  } from "react-router-dom";
 
 const useBusiness = () => {
     const [business, setBusiness] = useRecoilState(currentBusinessState);
@@ -13,13 +13,10 @@ const useBusiness = () => {
 }
 
 const useScrollTop = () =>{
-    //let location = useNavigate ();
-    const scrollTop = () =>{
-        window.document.scrollTop = 0;
-    }
-
-    useEffect(() =>{
-        console.log('location change')
-    }, [document.location.pathname])
+    const location = useLocation();
+    useEffect(() => {
+        window.scrollTo(0,0)
+    }, [location]);
+    
 }
 export { useBusiness, useScrollTop };
