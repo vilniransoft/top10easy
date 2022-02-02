@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { connectStateResults, Hits, ToggleRefinement } from 'react-instantsearch-dom';
 import { useRecoilValue } from 'recoil';
-import { localeState } from '../../../context/appState';
+import { localeState, searchLocationState } from '../../../context/appState';
 import locales from '../../../locales/locales';
 import AlgoliaCard from '../AlgoliaCard/AlgoliaCard';
 import NoResultsFound from '../NoResultsFound/NoResultsFound';
@@ -11,6 +11,7 @@ export default function ResultsPage({ props, searchResults  }){
   const CustomStateResults = connectStateResults(NoResultsFound);
   const currentLocale = useRecoilValue(localeState)
   const [localeText, setLocaleText] = useState(locales[currentLocale]?.value)
+  const selectedLocation = useRecoilValue(searchLocationState)
 
   useEffect(() => {
     setLocaleText(locales[currentLocale]?.value)
@@ -29,6 +30,8 @@ export default function ResultsPage({ props, searchResults  }){
       </div>
       <div className="hidden h-0">
         <ToggleRefinement attribute="_locale" label={localeText} value={localeText} defaultRefinement={localeText}/>
+        <ToggleRefinement attribute="_city" label={selectedLocation?.city} value={selectedLocation?.city} defaultRefinement={selectedLocation?.city}/>
+        <ToggleRefinement attribute="_city_state" label={selectedLocation?.state} value={selectedLocation?.state} defaultRefinement={selectedLocation?.state}/>
       </div>
   </div>
 }

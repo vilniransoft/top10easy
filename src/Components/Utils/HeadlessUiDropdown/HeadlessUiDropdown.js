@@ -2,6 +2,8 @@ import { Fragment, useEffect, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 import splitbee from '@splitbee/web';
+import { useRecoilState } from 'recoil';
+import { searchLocationState } from '../../../context/appState';
 
 const locationOptions = [
     {label: 'Raleigh, NC', country: 'united states', city: 'Raleigh', state: 'North Carolina', stateAb: 'NC',  active: true},
@@ -9,35 +11,42 @@ const locationOptions = [
 ]
 export default function HeadlessUiDropdown() {
   const [selected, setSelected] = useState([])
-  const [locations, setLocations] = useState([])
+  const [locations, setLocations] = useState([{
+    label: "NC, Raleigh",
+    country: "US",
+    state: "North Carolina",
+    state_abbreviation: "NC",
+    city: "Raleigh",
+    city_longitude: -71.4817753,
+    city_latitude: 46.856283,
+    active: true
+  }])
+  const [stateLocation, setStateLocation] = useRecoilState(searchLocationState);
+
   useEffect(()=>{
     async function loadLocations(){
       const origin = (document.location.origin.includes('localhost')) ? 'http://localhost:8000' : 'http://ec2-3-84-109-9.compute-1.amazonaws.com:8000';
       const path = '/api/v2/locations/?fields=*'
       const url = `${origin}${path}`
-      console.log(url)
       const serverRes = await fetch(url);
-      console.log(serverRes)
       const business = await serverRes.json();
-      console.log("========================business")
-      console.log(business)
-      const businessLocations = business?.items.map( loc => { return {
-        label: `${loc?._city_state_abbr}`,
-        country: loc?._country,
-        city: loc?._city,
-        state: loc?._city_state,
-        stateAb: loc?._city_state
-      }})
-      const businessUniqueLabel = [...new Map(businessLocations.map(item =>
-        [item['label'], item])).values()];
-        console.log(businessUniqueLabel)
-        setSelected(businessUniqueLabel[0])
-        setLocations(businessUniqueLabel);
-        
+      if(business){
+        const businessLocations = business?.items.map( loc => { return {
+          label: `${loc?._city_state_abbr}`,
+          country: loc?._country,
+          city: loc?._city,
+          state: loc?._city_state,
+          stateAb: loc?._city_state
+        }})
+        const businessUniqueLabel = [...new Map(businessLocations.map(item =>
+          [item['label'], item])).values()];
+          console.log(businessUniqueLabel)
+          setLocations(businessUniqueLabel);
+      }
+      setSelected(locations[0])
     }
-    console.log('loading locations')
     loadLocations()
-
+    setSelected(locations[0])
   },[])
 
     useEffect(()=>{
@@ -51,6 +60,7 @@ export default function HeadlessUiDropdown() {
         splitbee.track(`state_filter`, {
             type: selected.state
         })
+        setStateLocation(selected)
     }, [selected])  
   return (
     <div className="w-42 p-4">

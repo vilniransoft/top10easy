@@ -1,12 +1,16 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Highlight, connectRefinementList } from 'react-instantsearch-dom';
 import splitbee from '@splitbee/web';
 import { BsCurrencyDollar } from "react-icons/bs";
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { searchLocationState } from '../../../context/appState';
 
 const RefinementList = ({ attribute, items, isFromSearch, refine, searchForItems, createURL}) => {
-
+  const [selectedLocation, setSelectedLocation] = useRecoilState(searchLocationState)
+   
     const refineList = (e, item) =>{
-        e.preventDefault();
+      setSelectedLocation({country: "", state: "", city:""})
+        e?.preventDefault();
         refine(item.value);
         if(item.value.length > 0){
             splitbee.track(`${attribute}_filter`, {
