@@ -1,12 +1,12 @@
 import { connectAutoComplete } from 'react-instantsearch-dom';
 
-const Autocomplete = ({ showSuggestions, qryChange, dropSelect, handleSearch, hits, currentRefinement, refine, btnText, placeholder }) => (
+const Autocomplete = ({ elmRef, hasFocus, qryChange, dropSelect, handleSearch, handleFocus, hits, currentRefinement, refine, btnText, placeholder }) => (
 
-  <div className="relative inline-block w-full">
+  <div className="relative inline-block w-full" ref={elmRef}>
     <div className="flex justify-center">
         <div className="pt-2 relative mx-auto text-gray-600">
                   <input className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-l-lg text-sm focus:outline-none"
-                  type="search" name="search" onChange={(e)=> {qryChange(e.currentTarget.value);refine(e.currentTarget.value)}} placeholder={placeholder}/>
+                  type="search" name="search" onFocus={()=>handleFocus()} onChange={(e)=> {qryChange(e.currentTarget.value);refine(e.currentTarget.value)}} placeholder={placeholder}/>
                   <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
                   <svg className="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                       xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
@@ -22,10 +22,10 @@ const Autocomplete = ({ showSuggestions, qryChange, dropSelect, handleSearch, hi
               {btnText}
               </button>
     </div>
-    {(showSuggestions ?? false) ? hits.map(hit => (
+    {(hasFocus ?? false) ? hits.map(hit => (
       <div key={hit.objectID} data-id={hit.objectID} onClick={(e)=> dropSelect(hit)} className="py-2 hover:bg-green-200 z-50 absolute w-3/4 rounded-lg shadow-md">
         <div className="flex items-center cursor-pointer justify-between truncate w-full">
-            <span key={hit.objectID + "title"} className="text-gray-700 block px-4 text-base font-medium  dark:text-gray-400 w-full" role="menuitem" tabIndex="-1">{hit.title}</span>
+            <span onFocus={()=>handleFocus()} key={hit.objectID + "title"} className="text-gray-700 block px-4 text-base font-medium  dark:text-gray-400 w-full" role="menuitem" tabIndex="-1">{hit.title}</span>
         </div>
     </div>
     ))

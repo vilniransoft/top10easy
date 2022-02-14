@@ -44,3 +44,8 @@ export const localeState = atom({
   default: "en",
   effects_UNSTABLE: [persistAtom],
 });
+export const globalSearchFocusState = atom({
+  key: 'globalSearchFocusState',
+  default: false,
+  effects_UNSTABLE: [ persistAtom ]
+});

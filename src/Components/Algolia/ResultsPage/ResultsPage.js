@@ -33,8 +33,7 @@ export default function ResultsPage({ props, searchResults  }){
         <ToggleRefinement attribute="_locale" label={localeText} value={localeText} defaultRefinement={localeText}/>
         <ToggleRefinement attribute="_city" label={selectedLocation?.city} value={selectedLocation?.city} defaultRefinement={selectedLocation?.city}/>
         <ToggleRefinement attribute="_city_state" label={selectedLocation?.state} value={selectedLocation?.state} defaultRefinement={selectedLocation?.state}/>
-        <ToggleRefinement attribute="_category" label={category} value={category} defaultRefinement={category}/>
-        
+        <ToggleRefinement attribute="_category" label={category} value={category} defaultRefinement={category}/>        
       </div>
   </div>
 }

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { currentBusinessState } from '../context/appState';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { currentBusinessState, globalSearchFocusState } from '../context/appState';
 import { useLocation  } from "react-router-dom";
 
 const useBusiness = () => {
@@ -11,7 +11,20 @@ const useBusiness = () => {
        // if (deepEqual(business !== JSON.parse(localStorage.business))) setBusiness(JSON.parse(localStorage.business));
     }, [])
 }
-
+const useLoseFocus = (ref) => {
+    const setHasFocus = useSetRecoilState(globalSearchFocusState)
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (ref.current && !ref.current.contains(e.target)) {
+                setHasFocus(false)
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [ref, setHasFocus]);
+}
 const useScrollTop = () =>{
     const location = useLocation();
     useEffect(() => {
@@ -19,4 +32,4 @@ const useScrollTop = () =>{
     }, [location]);
     
 }
-export { useBusiness, useScrollTop };
+export { useBusiness, useScrollTop, useLoseFocus };
