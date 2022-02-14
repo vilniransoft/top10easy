@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { connectStateResults, Hits, ToggleRefinement } from 'react-instantsearch-dom';
 import { useRecoilValue } from 'recoil';
-import { localeState, searchLocationState } from '../../../context/appState';
+import { currentBusinessState, currentBussinessCategory, localeState, searchLocationState } from '../../../context/appState';
 import locales from '../../../locales/locales';
 import AlgoliaCard from '../AlgoliaCard/AlgoliaCard';
 import NoResultsFound from '../NoResultsFound/NoResultsFound';
@@ -12,6 +12,7 @@ export default function ResultsPage({ props, searchResults  }){
   const currentLocale = useRecoilValue(localeState)
   const [localeText, setLocaleText] = useState(locales[currentLocale]?.value)
   const selectedLocation = useRecoilValue(searchLocationState)
+  const category = useRecoilValue(currentBussinessCategory);
 
   useEffect(() => {
     setLocaleText(locales[currentLocale]?.value)
@@ -32,6 +33,8 @@ export default function ResultsPage({ props, searchResults  }){
         <ToggleRefinement attribute="_locale" label={localeText} value={localeText} defaultRefinement={localeText}/>
         <ToggleRefinement attribute="_city" label={selectedLocation?.city} value={selectedLocation?.city} defaultRefinement={selectedLocation?.city}/>
         <ToggleRefinement attribute="_city_state" label={selectedLocation?.state} value={selectedLocation?.state} defaultRefinement={selectedLocation?.state}/>
+        <ToggleRefinement attribute="_category" label={category} value={category} defaultRefinement={category}/>
+        
       </div>
   </div>
 }

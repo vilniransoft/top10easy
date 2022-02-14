@@ -34,7 +34,11 @@ export const currentVideoModalState = atom({
   default: {open:false, link: ''},
   effects_UNSTABLE: [persistAtom],
 });
-
+export const currentBussinessCategory = atom({
+  key: 'currentBussinessCategory', 
+  default: '',
+  effects_UNSTABLE: [persistAtom],
+});
 export const localeState = atom({
   key: 'localeState', 
   default: "en",

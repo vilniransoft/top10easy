@@ -50,7 +50,5 @@ export default function Search(){
                     name="submit" onClick={(e) =>{handleSearch(e)}}>
             {searchText?.button}
             </button>
-        </div>
-        
-                        
+        </div>               
 }

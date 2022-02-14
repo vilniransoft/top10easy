@@ -10,6 +10,7 @@ import GeoResultsPage from "../../Algolia/GeoResultsPage/GeoResultsPage";
 export default function EzSSearch({searchClient}){  
     const searchFacets = [{value: '_city', label:'City', searchable: true},
     {value: '_city_state', label:'State', searchable: true},
+    {value: '_category', label:'Category', searchable: false},
     {value: 'business_price_range', label:'Price Range', searchable: false},
     {value: 'business_stars', label:'Review Score', searchable: false}] 
     const center = useState({lat: 59.95, lng: 30.33})

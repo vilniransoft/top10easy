@@ -40,7 +40,6 @@ export default function HeadlessUiDropdown() {
         }})
         const businessUniqueLabel = [...new Map(businessLocations.map(item =>
           [item['label'], item])).values()];
-          console.log(businessUniqueLabel)
           setLocations(businessUniqueLabel);
       }
       setSelected(locations[0])
@@ -63,7 +62,7 @@ export default function HeadlessUiDropdown() {
         setStateLocation(selected)
     }, [selected])  
   return (
-    <div className="w-42 p-4">
+    <div className="w-full sm:w-42 sm:p-4">
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
           <Listbox.Button className="inline-flex items-center w-full py-2 pl-3 pr-8 bg-white border-2 rounded-lg cursor-pointer city-filter">

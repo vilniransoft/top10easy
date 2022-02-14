@@ -32,7 +32,7 @@ const RefinementList = ({ attribute, items, isFromSearch, refine, searchForItems
   }
     return(
     <ul>
-        <li className="capitalize">{`${attribute.replace('_city_', '').replace('_', ' ')}`}</li>
+        <li className="capitalize">{`${attribute.replace('_city_', '').replaceAll('_', ' ')}`}</li>
       <li>
         {/* <input
           type="search"
