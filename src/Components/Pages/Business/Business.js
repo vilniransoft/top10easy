@@ -30,7 +30,7 @@ export default function Business(){
             const url = `https://top10cms.link/api/v2/pages/?fields=*&type=businesses.BusinessesPage&slug=${params?.name}&locale=${currentLocale}`
             const serverRes = await fetch(url, {
                 headers: {
-                    'Access-Control-Allow-Origin': 'https://top10cms.link'
+                    'Access-Control-Allow-Origin': '*'
                 }});
             const business = await serverRes.json()
             console.log(business)
