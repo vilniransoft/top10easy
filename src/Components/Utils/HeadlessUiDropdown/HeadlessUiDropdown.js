@@ -28,7 +28,10 @@ export default function HeadlessUiDropdown() {
       const origin = (document.location.origin.includes('localhost')) ? 'http://localhost:8000' : 'https://top10cms.link';
       const path = '/api/v2/locations/?fields=*'
       const url = `${origin}${path}`
-      const serverRes = await fetch(url);
+      const serverRes = await fetch(url, {
+        headers: {
+            'Access-Control-Allow-Origin': 'https://top10cms.link'
+        }});
       const business = await serverRes.json();
       if(business){
         const businessLocations = business?.items.map( loc => { return {

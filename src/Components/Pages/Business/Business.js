@@ -28,7 +28,10 @@ export default function Business(){
         async function getBusiness(){
             // the url is temporary need to change once certs have been properly configured
             const url = `https://top10cms.link/api/v2/pages/?fields=*&type=businesses.BusinessesPage&slug=${params?.name}&locale=${currentLocale}`
-            const serverRes = await fetch(url);
+            const serverRes = await fetch(url, {
+                headers: {
+                    'Access-Control-Allow-Origin': 'https://top10cms.link'
+                }});
             const business = await serverRes.json()
             console.log(business)
             if(Object.values(business?.businesses_businessespage[0].businesses_businesshoursorderables).length > 0){
