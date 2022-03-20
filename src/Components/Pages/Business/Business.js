@@ -27,7 +27,7 @@ export default function Business(){
     useEffect(()=>{
         async function getBusiness(){
             // the url is temporary need to change once certs have been properly configured
-            const url = `http://ec2-3-84-109-9.compute-1.amazonaws.com:8000/api/v2/pages/?fields=*&type=businesses.BusinessesPage&slug=${params?.name}&locale=${currentLocale}`
+            const url = `https://top10cms.link//api/v2/pages/?fields=*&type=businesses.BusinessesPage&slug=${params?.name}&locale=${currentLocale}`
             const serverRes = await fetch(url)
             const business = await serverRes.json()
             console.log(business)

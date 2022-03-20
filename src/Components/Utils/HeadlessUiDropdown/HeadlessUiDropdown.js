@@ -25,7 +25,7 @@ export default function HeadlessUiDropdown() {
 
   useEffect(()=>{
     async function loadLocations(){
-      const origin = (document.location.origin.includes('localhost')) ? 'http://localhost:8000' : 'http://ec2-3-84-109-9.compute-1.amazonaws.com:8000';
+      const origin = (document.location.origin.includes('localhost')) ? 'http://localhost:8000' : 'https://top10cms.link/';
       const path = '/api/v2/locations/?fields=*'
       const url = `${origin}${path}`
       const serverRes = await fetch(url);
