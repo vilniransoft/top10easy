@@ -48,7 +48,7 @@ export default function AlgoliaCard(props) {
     <div className="mb-8">
     <p className="text-sm text-gray-600 flex items-center">
         </p>
-        <Link data-splitbee-event="Business Link" data-splitbee-event-type={props.hit.slug} to={`business/${props.hit.slug}`} onClick={()=>{updateState()}} className="text-gray-900 font-bold text-xl mb-2"> {props.hit?.title  ?? "Test Business"}</Link>
+        <Link data-splitbee-event="Business Link" data-splitbee-event-type={props.hit.slug} to={`../business/${props.hit.slug}`} onClick={()=>{updateState()}} className="text-gray-900 font-bold text-xl mb-2"> {props.hit?.title  ?? "Test Business"}</Link>
         <div className="text-sm text-gray-600 flex items-center">
         <Stars stars={props?.hit?.business_stars}/>
         </div>

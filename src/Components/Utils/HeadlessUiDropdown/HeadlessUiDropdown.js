@@ -25,21 +25,18 @@ export default function HeadlessUiDropdown() {
 
   useEffect(()=>{
     async function loadLocations(){
-      const origin = (document.location.origin.includes('localhost')) ? 'http://localhost:8000' : 'https://top10cms.link';
+      const origin = (document.location.origin.includes('localhost')) ? 'https://top10cms.link' : 'https://top10cms.link';
       const path = '/api/v2/locations/?fields=*'
       const url = `${origin}${path}`
-      const serverRes = await fetch(url, {
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        }});
+      const serverRes = await fetch(url);
       const business = await serverRes.json();
       if(business){
         const businessLocations = business?.items.map( loc => { return {
-          label: `${loc?._city_state_abbr}`,
-          country: loc?._country,
-          city: loc?._city,
-          state: loc?._city_state,
-          stateAb: loc?._city_state
+          label: `${loc?.state_abbreviation}, ${loc?.city}`,
+          country: loc?.country,
+          city: loc?.city,
+          state: loc?.state,
+          stateAb: loc?.state_abbreviation
         }})
         const businessUniqueLabel = [...new Map(businessLocations.map(item =>
           [item['label'], item])).values()];
@@ -52,7 +49,6 @@ export default function HeadlessUiDropdown() {
   },[])
 
     useEffect(()=>{
-        console.log(selected)
         splitbee.track(`city_filter`, {
             type: selected.city
         })
@@ -63,7 +59,7 @@ export default function HeadlessUiDropdown() {
             type: selected.state
         })
         setStateLocation(selected)
-    }, [selected])  
+    }, [selected, setStateLocation])  
   return (
     <div className="w-full sm:w-42 sm:p-4">
       <Listbox value={selected} onChange={setSelected}>

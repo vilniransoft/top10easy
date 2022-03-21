@@ -28,24 +28,21 @@ export default function Business(){
         async function getBusiness(){
             // the url is temporary need to change once certs have been properly configured
             const url = `https://top10cms.link/api/v2/pages/?fields=*&type=businesses.BusinessesPage&slug=${params?.name}&locale=${currentLocale}`
-            const serverRes = await fetch(url, {
-                headers: {
-                    'Access-Control-Allow-Origin': '*'
-                }});
+            const serverRes = await fetch(url);
             const business = await serverRes.json()
-            console.log(business)
-            if(Object.values(business?.businesses_businessespage[0].businesses_businesshoursorderables).length > 0){
-                setWorkDays(Object.values(business?.businesses_businessespage[0]?.businesses_businesshoursorderables).map( hrs => {
-                    return { day: hrs?.businesses_businesshour?.weekday ?? '', 
-                            hours: (!hrs?.businesses_businesshour.closed) ? `${hrs?.businesses_businesshour?.from_hour.substring(0, hrs?.businesses_businesshour?.from_hour?.length - 3) ?? ''} - ${hrs?.businesses_businesshour?.to_hour?.substring(0, hrs?.businesses_businesshour?.to_hour?.length - 3) ?? ''}` : '-- CLOSED --'
-                                }
-                            }))
+            if(business?.items?.[0]?.businesses_businesshoursorderables){
+                if(Object.values(business?.items?.[0]?.businesses_businesshoursorderables)?.length > 0){
+                    setWorkDays(Object.values(business?.items?.[0]?.businesses_businesshoursorderables)?.map( hrs => {
+                        return { day: hrs?.businesses_businesshour?.weekday ?? '', 
+                                hours: (!hrs?.businesses_businesshour?.closed) ? `${hrs?.businesses_businesshour?.from_hour?.substring(0, hrs?.businesses_businesshour?.from_hour?.length - 3) ?? ''} - ${hrs?.businesses_businesshour?.to_hour?.substring(0, hrs?.businesses_businesshour?.to_hour?.length - 3) ?? ''}` : '-- CLOSED --'
+                                    }
+                                }))
+                }
             }
-            setSelectedBusiness({...business?.businesses_businessespage[0], ...business?.businesses_businessespage[0]?.wagtailcore_page})
-           
+            setSelectedBusiness(business?.items?.[0]);
         }
-        getBusiness()
-    }, [currentLocale])   
+        getBusiness();
+    }, [currentLocale, setSelectedBusiness, params?.name])   
 
     const getStars = ()=>{
         return (selectedBusiness?.business_stars) ? <Stars stars={selectedBusiness?.business_stars}/> :''
@@ -138,7 +135,7 @@ export default function Business(){
                                 { workDays.map( (day, idx)=>{
                                     return <li key={idx} className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid cursor-pointer hover:text-green-400">
                                     <span className="inline-flex items-center justify-center w-6 h-6 mr-2"><span className="text-sm font-bold">{days[day.day]}</span></span> 
-                                    <span className="ml-24">{(day.colsed)? '--- closed ---':day.hours}</span>
+                                    <span className="ml-24">{(day?.colsed)? '--- closed ---':day?.hours}</span>
                                 </li>
                                 })}
                             
