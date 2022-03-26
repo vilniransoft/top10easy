@@ -18,8 +18,8 @@ export default function AlgoliaCard(props) {
     useEffect(()=>{
         const hitItem = document.querySelector('.ais-Hits-item')
         setData(props.hit)
-        //props.hit?.wagtailimages_image?.file ?? 
-        setImg(`${document.location.origin}${logo}`)
+        const image_url = props.hit?._image_url ?? `${document.location.origin}${logo}`
+        setImg(image_url)
     }, [props])
 
     const updateState = () =>{

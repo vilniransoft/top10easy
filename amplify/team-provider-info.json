@@ -10,6 +10,12 @@
       "StackName": "amplify-top10ezdev-dev-221148",
       "StackId": "arn:aws:cloudformation:us-east-1:403235204874:stack/amplify-top10ezdev-dev-221148/eb2601a0-3538-11ec-bd7f-121c5b12bc97",
       "AmplifyAppId": "d2b45gr2kx8wqc"
+    },
+    "categories": {
+      "auth": {
+        "top10ezdev95b6f6ab": {},
+        "true": {}
+      }
     }
   }
 }
