@@ -56,7 +56,7 @@ export default function Business(){
             <div className="flex flex-col items-center sm:px-5 md:flex-row">
                 <div className="w-full md:w-1/2">
                     <a href="#_" className="block">
-                        <img className="object-cover w-full h-full rounded-lg max-h-64 sm:max-h-96" src="https://cdn.devdojo.com/images/may2021/cupcakes.jpg" alt="Savory Cupcakes" />
+                        <img className="object-cover w-full h-full rounded-lg max-h-64 sm:max-h-96" src={(selectedBusiness?._image_url) ? selectedBusiness?._image_url : "https://cdn.devdojo.com/images/may2021/cupcakes.jpg"} alt="Savory Cupcakes" />
                     </a>
                 </div>
                 <div className="flex flex-col items-start justify-center w-full h-full py-6 mb-6 md:mb-0 md:w-1/2">
