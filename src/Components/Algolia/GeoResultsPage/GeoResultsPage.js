@@ -35,7 +35,7 @@ return (<div style={{ height: 500 }}>
                 )}
               </GoogleMapsLoader>
               <div className="hidden h-0">
-        <ToggleRefinement attribute="_locale" label={localeText} value={localeText} defaultRefinement={<ToggleRefinement attribute="_locale" label={localeText} value={localeText} defaultRefinement={localeText}/>}/>
+        <ToggleRefinement attribute="_locale" label={localeText} value={localeText} defaultRefinement={localeText}/>
         <ToggleRefinement attribute="_city" label={selectedLocation?.city} value={selectedLocation?.city} defaultRefinement={selectedLocation?.city}/>
         <ToggleRefinement attribute="_city_state" label={selectedLocation?.state} value={selectedLocation?.state} defaultRefinement={selectedLocation?.state}/>
         <ToggleRefinement attribute="_category" label={category} value={category} defaultRefinement={category}/>

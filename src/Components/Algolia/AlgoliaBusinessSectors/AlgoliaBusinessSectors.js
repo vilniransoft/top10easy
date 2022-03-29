@@ -1,20 +1,20 @@
-import { Fragment, useEffect, useRef, createElement, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { InstantSearch } from 'react-instantsearch-dom';
-import { render } from 'react-dom';
-import { autocomplete } from '@algolia/autocomplete-js';
 import { useNavigate  } from "react-router";
 import splitbee from '@splitbee/web';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import { currentBussinessCategory, globalSearchFocusState, localeState, searchQueryState } from "../../../context/appState";
 import locales from "../../../locales/locales";
 import CustomAutocomplete from '../Autocomplete/Autocomplete';
 import algoliasearch from 'algoliasearch';
 import { useLoseFocus } from '../../../hooks/state';
+import { ToggleRefinement } from 'react-instantsearch-dom';
 
 const qrySuggestClient = algoliasearch("CP26C79INL", "9d24d11b715d68508e486747a5538700");
 
 export default function AlgoliaBusinessSectors(props) {
   const currentLocale = useRecoilValue(localeState);
+  const [localeText, setLocaleText] = useState(locales[currentLocale]?.value);
   const [category, setCategory] = useRecoilState(currentBussinessCategory);
   const [searchText, setSearchText] = useState(locales[currentLocale]?.utils?.search);
   const [showSuggestions, setShowSuggestions] = useState(false)
@@ -26,9 +26,8 @@ export default function AlgoliaBusinessSectors(props) {
   useLoseFocus(elmRef)
   
     useEffect(() => {
-        setSearchText(locales[currentLocale]?.utils?.search)
+      setLocaleText(locales[currentLocale]?.value)
     }, [currentLocale])
-
     useEffect(() => {
       (qryTerm?.trim().length> 1) ? setShowSuggestions(true) : setShowSuggestions(false)
       
@@ -54,6 +53,9 @@ export default function AlgoliaBusinessSectors(props) {
 
     return <InstantSearch searchClient={qrySuggestClient} indexName="BusinessSectorPage">
             <CustomAutocomplete elmRef={elmRef} hasFocus={hasFocus} handleFocus={handleFocus} placeholder={placeholder} btnText={searchText?.button} showSuggestions={showSuggestions} handleSearch={handleSearch} qryChange={qryChange} dropSelect={dropSelect}/>
+            <div className="hidden">
+              <ToggleRefinement attribute="_locale" label={localeText} value={localeText} defaultRefinement={localeText}/>
+            </div>
           </InstantSearch>          
         
   }

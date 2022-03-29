@@ -9,8 +9,8 @@ const locales = {
 
         },
         home : {
-            h1Top : 'What are you',
-            h1Bottom: 'Looking for?'
+            h1Top : 'What do',
+            h1Bottom: 'You want?'
         },
         utils : {
             search : {

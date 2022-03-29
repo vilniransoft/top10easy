@@ -22,13 +22,14 @@ const Autocomplete = ({ elmRef, hasFocus, qryChange, dropSelect, handleSearch, h
               {btnText}
               </button>
     </div>
-    {(hasFocus ?? false) ? hits.map(hit => (
-      <div key={hit.objectID} data-id={hit.objectID} onClick={(e)=> dropSelect(hit)} className="py-2 hover:bg-green-200 z-50 absolute w-3/4 rounded-lg shadow-md">
-        <div className="flex items-center cursor-pointer justify-between truncate w-full">
-            <span onFocus={()=>handleFocus()} key={hit.objectID + "title"} className="text-gray-700 block px-4 text-base font-medium  dark:text-gray-400 w-full" role="menuitem" tabIndex="-1">{hit.title}</span>
+    {(hasFocus ?? false) ? 
+      <div className="py-2 block z-50 absolute w-3/4 rounded-lg shadow-md bg-white">
+        {hits.map(hit => (
+        <div className="block items-center cursor-pointer justify-between truncate w-full hover:bg-green-200" onClick={(e)=> dropSelect(hit)} >
+            <span onFocus={()=> handleFocus()} key={hit.objectID + "title"} className="text-gray-700 block px-4 text-base font-medium  dark:text-gray-400 w-full" role="menuitem" tabIndex="-1">{hit.title}</span>
         </div>
+        ))}
     </div>
-    ))
     :
     null
     }
