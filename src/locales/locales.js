@@ -9,8 +9,8 @@ const locales = {
 
         },
         home : {
-            h1Top : 'What do',
-            h1Bottom: 'You want?'
+            h1Top : 'What Do',
+            h1Bottom: 'You Want?'
         },
         utils : {
             search : {
@@ -28,7 +28,7 @@ const locales = {
             submitBis: 'Soumettre votre entreprise'
         },
         home : {
-            h1Top : 'Que cherchez',
+            h1Top : 'Que Cherchez',
             h1Bottom: 'Vous?'
         },
         utils : {

@@ -1,5 +1,9 @@
+import { useSearchParams } from "react-router-dom";
+
 export default function NoResultsFound({ searchState }){
-    const query = searchState?.query ?? '';
+    let [searchParams, setSearchParams] = useSearchParams();
+    const query = searchParams?.get('q') ?? '';
+    
     return <section className="py-20 bg-white">
         <div className="px-4 mx-auto text-center max-w-7xl sm:px-6 lg:px-8">
             <h2 className="text-2xl tracking-tight text-gray-900 sm:text-4xl md:text-5xl xl:text-6xl">
