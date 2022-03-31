@@ -41,7 +41,7 @@ export default function AlgoliaBusinessSectors(props) {
       setQryTerm(qry)
     }
     const dropSelect = (hit) => {
-      setCategory(`${hit.title}s`)
+      setCategory(`${hit.title}`)
       navigate(`/search?q=${hit.title}`) 
       setHasFocus(false)  
     }
