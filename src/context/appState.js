@@ -22,7 +22,16 @@ export const searchQueryState = atom({
     },
     effects_UNSTABLE: [persistAtom],
   });
-
+  export const userLoginState = atom({
+    key: 'userLoginState',
+    default: {
+      authenticated: false,
+      username: 'anonymous',
+      email: 'anonymous@anonymous.com',
+      refreshToken: ''
+    },
+    effects_UNSTABLE: [persistAtom],
+  });
 export const currentBusinessState = atom({
     key: 'currentBusinessState',
     default: {},

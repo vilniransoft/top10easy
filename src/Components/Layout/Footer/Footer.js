@@ -2,18 +2,26 @@ import { Link } from 'react-router-dom';
 import logo from '../../../imgs/LogoTop10.jpg';
 import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { localeState } from "../../../context/appState";
+import { localeState, userLoginState } from "../../../context/appState";
 import locales from "../../../locales/locales";
+import GoogleLogin from '../../Utils/GoogleLogin/GoogleLogin';
+import GoogleLogout from '../../Utils/GoogleLogout/GoogleLogout';
 export default function Footer(){
     const currentLocale = useRecoilValue(localeState)
+    const userAuth = useRecoilValue(userLoginState)
     const [labels, setLabels] = useState(locales[currentLocale]?.navigationLabels)
 
     useEffect(() => {
         setLabels(locales[currentLocale]?.navigationLabels)
     }, [currentLocale])
 
+    useEffect(() => {
+
+    },[userAuth])
     
     return  <section className="bg-white">
+            {(!userAuth.authenticated) ? <GoogleLogin clientId='755311199624-tghah0qnsk7aqk44d8q90ivk3uhmc680.apps.googleusercontent.com' /> 
+                                        : <GoogleLogout clientId='755311199624-tghah0qnsk7aqk44d8q90ivk3uhmc680.apps.googleusercontent.com'/>}
         <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8 flex flex-col align-center">
         <img src={logo} alt="Top10easy" className="w-24 self-center"/>
             <nav className="flex flex-wrap justify-center -mx-5 -my-2">

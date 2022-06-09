@@ -9,11 +9,12 @@ import About from './Components/Pages/About/About';
 import EzSearch from './Components/Pages/EzSearch/EzSearch';
 import Contact from './Components/Pages/Contact/Contact';
 import Business from './Components/Pages/Business/Business';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Privacy from './Components/Pages/Privacy/Privacy';
 import splitbee from '@splitbee/web';
 import { useBusiness, useScrollTop } from './hooks/state';
 import VideoModal from './Components/Utils/VideoModal/VideoModal';
+import AlgoliaInsights from './Components/Algolia/AlgoliaInsights/AlgoliaInsights';
 
 const searchClient = algoliasearch("CP26C79INL", "9d24d11b715d68508e486747a5538700");
 
@@ -42,6 +43,7 @@ function App() {
       </div>
       </InstantSearch>
       <VideoModal />
+      <AlgoliaInsights searchClient={searchClient} />
       <footer className="bottom-0 w-full">
         <Footer></Footer>
       </footer>

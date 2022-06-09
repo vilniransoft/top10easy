@@ -1,11 +1,11 @@
-import EzSearchHeader from "../../Layout/EzSearchHeader/EzSearchHeader";
-import ResultsPage from "../../Algolia/ResultsPage/ResultsPage";
-import Facet from "../../Algolia/Facet/Facet";
 import { useEffect, useState } from "react";
 import { searchViewState } from "../../../context/appState";
 import { useRecoilState } from "recoil";
 import { connectStateResults  } from 'react-instantsearch-dom';
 import GeoResultsPage from "../../Algolia/GeoResultsPage/GeoResultsPage";
+import EzSearchHeader from "../../Layout/EzSearchHeader/EzSearchHeader";
+import ResultsPage from "../../Algolia/ResultsPage/ResultsPage";
+import Facet from "../../Algolia/Facet/Facet";
 
 export default function EzSSearch({searchClient}){  
     const searchFacets = [{value: '_city', label:'City', searchable: true},

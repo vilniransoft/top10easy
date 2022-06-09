@@ -7,6 +7,7 @@ import Stars from "../../Utils/Stars/Stars";
 import GoogleMapReact from 'google-map-react';
 import MapBusinessMarker from "../../Utils/MapBusinessMarker/MapBusinessMarker";
 
+// Default workhours
 const weekHours = [
     {day: 'Monday', hours: '9:00 AM - 10:00 PM'},
     {day: 'Tuesday', hours: '9:00 AM - 10:00 PM'},

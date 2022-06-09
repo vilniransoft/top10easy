@@ -8,6 +8,7 @@ export default function EzInstallPrompt(){
     useEffect(() => {
       const handler = e => {
         e.preventDefault();
+        console.log('handler invoked')
         setSupportsPWA(true);
         const addBtn = document.querySelector('div.install-banner');
         addBtn.classList.remove("hidden")

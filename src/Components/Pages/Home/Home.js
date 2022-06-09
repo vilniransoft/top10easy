@@ -9,14 +9,10 @@ import AlgoliaBusinessSectors from "../../Algolia/AlgoliaBusinessSectors/Algolia
 export default function Home(){
     const currentLocale = useRecoilValue(localeState)
     const [homeText, setHomeText] = useState(locales[currentLocale]?.home)
-    const [query, setQuery] = useState('');
+
     useEffect(() => {
         setHomeText(locales[currentLocale]?.home)
     }, [currentLocale])
-
-    const onchange = (userQry) => {
-        console.log(userQry)
-    }
 
     return  <section className="w-full px-2 antialiased bg-white">
         <EzInstallPrompt />
