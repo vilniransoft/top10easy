@@ -21,9 +21,6 @@ export default function GoogleLogin({ clientId }) {
     
       const onFailure = (res) => {
         console.log('Login failed: res:', res);
-        alert(
-          `Failed to login. 😢 `
-        );
       };
     
       const {signIn} = useGoogleLogin({
