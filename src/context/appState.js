@@ -8,7 +8,12 @@ export const searchViewState = atom({
     default: 'list',
     effects_UNSTABLE: [persistAtom],
   });
-  export const searchLocationState = atom({
+export const searchHitState = atom({
+    key: 'searchHitState',
+    default: {},
+    effects_UNSTABLE: [persistAtom],
+  });
+export const searchLocationState = atom({
     key: 'searchLocationState',
     default: {country: "", state: "", city:""},
     effects_UNSTABLE: [persistAtom],
@@ -22,7 +27,7 @@ export const searchQueryState = atom({
     },
     effects_UNSTABLE: [persistAtom],
   });
-  export const userLoginState = atom({
+export const userLoginState = atom({
     key: 'userLoginState',
     default: {
       authenticated: false,

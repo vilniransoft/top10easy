@@ -2,8 +2,8 @@ import './AlgoliaCard.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../imgs/LogoTop10.jpg';
-import { searchViewState, currentBusinessState, currentVideoModalState, userLoginState } from "../../../context/appState";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { searchViewState, currentBusinessState, currentVideoModalState, userLoginState, searchHitState } from "../../../context/appState";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import Stars from '../../Utils/Stars/Stars';
 import { connectHitInsights } from 'react-instantsearch-dom';
 import aa from 'search-insights';
@@ -16,9 +16,11 @@ const Hit = ({ hit }) => {
     const [videoPrev, setVideoPrev] = useRecoilState(currentVideoModalState)
     const [selectedBusiness, setSelectedBusiness] = useRecoilState(currentBusinessState);
     const userAuth = useRecoilValue(userLoginState);
-
+    const setHit = useSetRecoilState(searchHitState)
+    
     useEffect(()=>{
         setData(hit)
+        setHit(hit)
         const image_url = hit?._image_url ?? `${document.location.origin}${logo}`
         setImg(image_url)
     }, [])
@@ -83,7 +85,17 @@ const Hit = ({ hit }) => {
     <div className="flex flex-col lg:flex-row items-center">
         <div className="px-2 p-3 sm:p-2 w-full lg:w-48">
             <button className="bg-gray-200 w-full hover:bg-gray-400 font-bold py-2 px-4 rounded text-black">
-                <span className="text-black">{hit?.business_phone ?? "555-555-9969"}</span>
+                <a className="text-black"
+                onClick={()=>
+                    aa('convertedObjectIDsAfterSearch', {
+                        userToken: userAuth.email,
+                        index:  'BusinessesPage',
+                        eventName: 'Call Business from Search',
+                        queryID: [hit.objectID],
+                        objectIDs: [hit.__position],
+                    })
+                } 
+                href={`tel:${selectedBusiness?.business_phone ?? 'Not Available'}`}>{selectedBusiness?.business_phone ?? 'Not Available'}</a>
             </button>
         </div>
         <div className="px-2 p-2 sm:p-2 w-full lg:w-48">

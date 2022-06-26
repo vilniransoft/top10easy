@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router"
-import { currentBusinessState, localeState, userLoginState } from "../../../context/appState";
+import { currentBusinessState, localeState, searchHitState, userLoginState } from "../../../context/appState";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useBusiness } from "../../../hooks/state";
 import Stars from "../../Utils/Stars/Stars";
@@ -24,6 +24,7 @@ export default function Business(){
     const currentLocale = useRecoilValue(localeState)
     const userAuth = useRecoilValue(userLoginState);
     const [workDays, setWorkDays] = useState(weekHours)
+    const hit = useRecoilValue(searchHitState)
     let params = useParams();
 
     useBusiness()
@@ -75,7 +76,16 @@ export default function Business(){
                         <div className="flex flex-col lg:flex-row items-center w-full ">
         <div className="px-2 p-3 sm:p-2 w-full lg:w-48">
             <button className="bg-gray-200 w-full hover:bg-gray-400 font-bold py-2 px-4 rounded text-black">
-            <a className="bg-gray-200 w-full hover:bg-gray-400 font-bold py-2 px-4 rounded text-black" 
+                <a className="text-black"
+                onClick={()=>
+                    aa('convertedObjectIDsAfterSearch', {
+                        userToken: userAuth.email,
+                        index:  'BusinessesPage',
+                        eventName: 'Call Business from Search',
+                        queryID: [hit.objectID],
+                        objectIDs: [hit.__position],
+                    })
+                }
                 href={`tel:${selectedBusiness?.business_phone ?? 'Not Available'}`}>{selectedBusiness?.business_phone ?? 'Not Available'}</a>
             </button>
         </div>
