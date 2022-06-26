@@ -32,7 +32,8 @@ export const userLoginState = atom({
     default: {
       authenticated: false,
       username: 'anonymous',
-      email: 'anonymous@anonymous.com',
+      name: 'anonymous',
+      email: 'anonymous',
       refreshToken: ''
     },
     effects_UNSTABLE: [persistAtom],

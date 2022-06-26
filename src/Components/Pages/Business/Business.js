@@ -79,7 +79,7 @@ export default function Business(){
                 <a className="text-black"
                 onClick={()=>
                     aa('convertedObjectIDsAfterSearch', {
-                        userToken: userAuth.email,
+                        userToken: userAuth.email.split('@')[0],
                         index:  'BusinessesPage',
                         eventName: 'Call Business from Search',
                         queryID: hit.__queryID,

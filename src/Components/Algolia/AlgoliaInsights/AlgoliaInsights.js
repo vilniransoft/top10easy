@@ -14,8 +14,8 @@ export default function AlgoliaInsights({ searchClient }) {
         appId: 'CP26C79INL',
         apiKey: '31c8c44b6cafedf9325e9c1748b215dc'
       })
-      console.log('init ai middleware for ', userAuth.email)
-      aa('setUserToken', userAuth.email);
+      console.log('init ai middleware for ', userAuth.email.split('@')[0])
+      aa('setUserToken', userAuth.email.split('@')[0]);
     }, [userAuth, searchClient])
 
     return null

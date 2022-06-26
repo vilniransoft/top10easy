@@ -43,7 +43,7 @@ const Hit = ({ hit }) => {
         { hit?.video_url ? <button className="absolute -m-40 sm:-mt-40 lg:-ml-20 cursor-pointer bg-white rounded-full shadow-md over:shadow-xl m-4" 
             onClick={ () => {
                 aa('clickedObjectIDsAfterSearch', {
-                    userToken: userAuth.email,
+                    userToken: userAuth.email.split('@')[0],
                     eventName: 'Business Video Clicked',
                     index: 'BusinessesPage',
                     queryID: hit.__queryID,
@@ -65,7 +65,7 @@ const Hit = ({ hit }) => {
             to={`../business/${hit.slug}`}
             onClick={()=> {
                 aa('clickedObjectIDsAfterSearch', {
-                    userToken: userAuth.email,
+                    userToken: userAuth.email.split('@')[0],
                     eventName: 'Business Clicked',
                     index: 'BusinessesPage',
                     queryID: hit.__queryID,
@@ -88,7 +88,7 @@ const Hit = ({ hit }) => {
                 <a className="text-black"
                 onClick={()=>
                     aa('convertedObjectIDsAfterSearch', {
-                        userToken: userAuth.email,
+                        userToken: userAuth.email.split('@')[0],
                         index:  'BusinessesPage',
                         eventName: 'Call Business from Search',
                         queryID: hit.__queryID,

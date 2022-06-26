@@ -11,6 +11,7 @@ export default function GoogleLogin({ clientId }) {
             authenticated: true,
             username: res.profileObj.email,
             email: res.profileObj.email,
+            name:  res.profileObj.name,
             token: ''
         })
         console.log(
