@@ -91,8 +91,8 @@ const Hit = ({ hit }) => {
                         userToken: userAuth.email,
                         index:  'BusinessesPage',
                         eventName: 'Call Business from Search',
-                        queryID: [hit.objectID],
-                        objectIDs: [hit.__position],
+                        queryID: hit.__queryID,
+                        objectIDs: [hit.objectID],
                     })
                 } 
                 href={`tel:${selectedBusiness?.business_phone ?? '#'}`}>{selectedBusiness?.business_phone ?? 'Not Available'}</a>
