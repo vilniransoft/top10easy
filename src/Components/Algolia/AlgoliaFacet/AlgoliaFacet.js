@@ -33,12 +33,7 @@ const RefinementList = ({ attribute, items, isFromSearch, refine, searchForItems
     return(
     <ul>
         <li className="capitalize">{`${attribute.replace('_city_', '').replaceAll('_', ' ')}`}</li>
-      <li>
-        {/* <input
-          type="search"
-          onChange={event => searchForItems(event.currentTarget.value)}
-        /> */}
-      </li>
+
       {items.map(item => (
         <li key={item.label}>
           <a

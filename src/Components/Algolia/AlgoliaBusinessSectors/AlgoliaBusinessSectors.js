@@ -10,7 +10,7 @@ import algoliasearch from 'algoliasearch';
 import { useLoseFocus } from '../../../hooks/state';
 import { ToggleRefinement } from 'react-instantsearch-dom';
 
-const qrySuggestClient = algoliasearch("CP26C79INL", "9d24d11b715d68508e486747a5538700");
+const qrySuggestClient = algoliasearch("CP26C79INL", "31c8c44b6cafedf9325e9c1748b215dc");
 
 export default function AlgoliaBusinessSectors(props) {
   const currentLocale = useRecoilValue(localeState);

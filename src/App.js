@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
-import { InstantSearch } from 'react-instantsearch-dom';
+import { InstantSearch, Configure } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch/lite';
 import Navigation from './Components/Layout/Navigation/Navigation';
 import Footer from './Components/Layout/Footer/Footer';
@@ -16,7 +16,7 @@ import { useBusiness, useScrollTop } from './hooks/state';
 import VideoModal from './Components/Utils/VideoModal/VideoModal';
 import AlgoliaInsights from './Components/Algolia/AlgoliaInsights/AlgoliaInsights';
 
-const searchClient = algoliasearch("CP26C79INL", "9d24d11b715d68508e486747a5538700");
+const searchClient = algoliasearch("CP26C79INL", "31c8c44b6cafedf9325e9c1748b215dc");
 
 function App() {
   useBusiness()
@@ -28,6 +28,13 @@ function App() {
   return (
     <div className="App">
     <InstantSearch searchClient={searchClient} indexName="BusinessesPage">
+    <Configure
+      hitsPerPage={10}
+      analytics={true}
+      enablePersonalization={false}
+      distinct
+      clickAnalytics
+    />
       <header className="App-header">
         <Navigation></Navigation>
       </header>
@@ -39,7 +46,7 @@ function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/search" element={<EzSearch />} />
           <Route path="/business/:name" element={<Business />} />
-        </Routes>
+      </Routes>
       </div>
       </InstantSearch>
       <VideoModal />

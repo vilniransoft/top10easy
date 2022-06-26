@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router"
-import { currentBusinessState, localeState } from "../../../context/appState";
+import { currentBusinessState, localeState, userLoginState } from "../../../context/appState";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useBusiness } from "../../../hooks/state";
 import Stars from "../../Utils/Stars/Stars";
 import GoogleMapReact from 'google-map-react';
 import MapBusinessMarker from "../../Utils/MapBusinessMarker/MapBusinessMarker";
+import aa from 'search-insights';
 
 // Default workhours
 const weekHours = [
@@ -21,6 +22,7 @@ export default function Business(){
     const days = {1: 'Monday', 2:'Tuesday', 3:'Wednesday', 4:'Thursday', 5:'Friday', 6:'Saturday', 7:'Sunday' }
     const [selectedBusiness, setSelectedBusiness] = useRecoilState(currentBusinessState);
     const currentLocale = useRecoilValue(localeState)
+    const userAuth = useRecoilValue(userLoginState);
     const [workDays, setWorkDays] = useState(weekHours)
     let params = useParams();
 
@@ -66,14 +68,15 @@ export default function Business(){
                         <h1 className="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl"><a href="#_">{selectedBusiness?.title ?? 'Mme Cupcake'}</a></h1>
                         <div className="flex flex-row items-start justify-center ">
                         <div className="text-sm text-gray-600 flex items-center align-center">
-                            {getStars()}
+                            { getStars() }
                             </div>
                             <span className="mt-1 pl-1">({selectedBusiness?.business_reviews} )Reviews</span>
                         </div>
                         <div className="flex flex-col lg:flex-row items-center w-full ">
         <div className="px-2 p-3 sm:p-2 w-full lg:w-48">
             <button className="bg-gray-200 w-full hover:bg-gray-400 font-bold py-2 px-4 rounded text-black">
-                <span className="text-black">{selectedBusiness?.business_phone ?? '123656789'}</span>
+            <a className="bg-gray-200 w-full hover:bg-gray-400 font-bold py-2 px-4 rounded text-black" 
+                href={`tel:${selectedBusiness?.business_phone ?? 'Not Available'}`}>{selectedBusiness?.business_phone ?? 'Not Available'}</a>
             </button>
         </div>
         <div className="px-2 p-2 sm:p-2 w-full lg:w-48">

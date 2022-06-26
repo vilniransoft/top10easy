@@ -3,7 +3,7 @@ import { connectStateResults, Hits, ToggleRefinement } from 'react-instantsearch
 import { useRecoilValue } from 'recoil';
 import { currentBusinessState, currentBussinessCategory, localeState, searchLocationState } from '../../../context/appState';
 import locales from '../../../locales/locales';
-import AlgoliaCard from '../AlgoliaCard/AlgoliaCard';
+import { AlgoliaCard } from '../AlgoliaCard/AlgoliaCard';
 import NoResultsFound from '../NoResultsFound/NoResultsFound';
 
 export default function ResultsPage({ props, searchResults  }){

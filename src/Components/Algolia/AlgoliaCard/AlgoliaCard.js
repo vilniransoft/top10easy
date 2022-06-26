@@ -1,26 +1,27 @@
 import './AlgoliaCard.css';
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../imgs/LogoTop10.jpg';
-import { searchViewState, currentBusinessState, currentVideoModalState } from "../../../context/appState";
-import { useRecoilState } from "recoil";
+import { searchViewState, currentBusinessState, currentVideoModalState, userLoginState } from "../../../context/appState";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Stars from '../../Utils/Stars/Stars';
+import { connectHitInsights } from 'react-instantsearch-dom';
+import aa from 'search-insights';
 
-export default function AlgoliaCard(props) {
+const Hit = ({ hit }) => {
     const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
     const [data, setData] = useState({})
     const [img, setImg] = useState(logo)
     const [viewType, setViewType] = useRecoilState(searchViewState);
     const [videoPrev, setVideoPrev] = useRecoilState(currentVideoModalState)
     const [selectedBusiness, setSelectedBusiness] = useRecoilState(currentBusinessState);
+    const userAuth = useRecoilValue(userLoginState);
 
     useEffect(()=>{
-        const hitItem = document.querySelector('.ais-Hits-item')
-        setData(props.hit)
-        const image_url = props.hit?._image_url ?? `${document.location.origin}${logo}`
+        setData(hit)
+        const image_url = hit?._image_url ?? `${document.location.origin}${logo}`
         setImg(image_url)
-    }, [props])
+    }, [])
 
     const updateState = () =>{
         setSelectedBusiness(data)
@@ -31,13 +32,23 @@ export default function AlgoliaCard(props) {
     }
 
     const displayVideo = () =>{
-        setVideoPrev({open:true, link: props?.hit?.video_url})
+        setVideoPrev({open:true, link: hit?.video_url})
     }
 
     return  <div className="max-w-sm lg:max-w-full lg:flex rounded-xl shadow-md hover:shadow-xl m-4">
     <div className="h-48 lg:h-auto lg:w-48 self-center flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" >
         <img className="h-48 w-full lg:w-48 object-cover" src={img} alt="Future Business"/>
-        { props?.hit?.video_url ? <button className="absolute -m-40 sm:-mt-40 lg:-ml-20 cursor-pointer bg-white rounded-full shadow-md over:shadow-xl m-4" onClick={() => displayVideo()}>
+        { hit?.video_url ? <button className="absolute -m-40 sm:-mt-40 lg:-ml-20 cursor-pointer bg-white rounded-full shadow-md over:shadow-xl m-4" 
+            onClick={ () => {
+                aa('clickedObjectIDsAfterSearch', {
+                    userToken: userAuth.email,
+                    eventName: 'Business Video Clicked',
+                    index: 'BusinessesPage',
+                    queryID: hit.__queryID,
+                    objectIDs: [hit.objectID],
+                    positions: [hit.__position],
+                });
+                displayVideo()}}>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-green-500 hover:text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -48,16 +59,31 @@ export default function AlgoliaCard(props) {
     <div className="mb-8">
     <p className="text-sm text-gray-600 flex items-center">
         </p>
-        <Link data-splitbee-event="Business Link" data-splitbee-event-type={props.hit.slug} to={`../business/${props.hit.slug}`} onClick={()=>{updateState()}} className="text-gray-900 font-bold text-xl mb-2"> {props.hit?.title  ?? "Test Business"}</Link>
+        <Link data-splitbee-event="Business Link" data-splitbee-event-type={hit.slug} 
+            to={`../business/${hit.slug}`}
+            onClick={()=> {
+                aa('clickedObjectIDsAfterSearch', {
+                    userToken: userAuth.email,
+                    eventName: 'Business Clicked',
+                    index: 'BusinessesPage',
+                    queryID: hit.__queryID,
+                    objectIDs: [hit.objectID],
+                    positions: [hit.__position],
+                })
+                updateState();
+                    }} 
+            className="text-gray-900 font-bold text-xl mb-2"> 
+            {hit?.title  ?? "Test Business"}
+        </Link>
         <div className="text-sm text-gray-600 flex items-center">
-        <Stars stars={props?.hit?.business_stars}/>
+        <Stars stars={hit?.business_stars}/>
         </div>
-        <p className="text-gray-700 text-base">{props?.hit?.business_description  ?? lorem}</p>
+        <p className="text-gray-700 text-base">{hit?.business_description  ?? lorem}</p>
     </div>
     <div className="flex flex-col lg:flex-row items-center">
         <div className="px-2 p-3 sm:p-2 w-full lg:w-48">
             <button className="bg-gray-200 w-full hover:bg-gray-400 font-bold py-2 px-4 rounded text-black">
-                <span className="text-black">{props?.hit?.business_phone ?? "555-555-9969"}</span>
+                <span className="text-black">{hit?.business_phone ?? "555-555-9969"}</span>
             </button>
         </div>
         <div className="px-2 p-2 sm:p-2 w-full lg:w-48">
@@ -81,6 +107,5 @@ export default function AlgoliaCard(props) {
     </div>
 </div>    
   }
-  AlgoliaCard.propTypes = {
-    hit: PropTypes.object.isRequired,
-  };
+
+export const AlgoliaCard = connectHitInsights(window.aa)(Hit);

@@ -38,7 +38,7 @@ export default function GoogleLogin({ clientId }) {
             <button onClick={() => signIn() } className="button flex items-center">
             <div>
                 <svg 
-                    class="centerHV" 
+                    className="centerHV" 
                     width="46px" 
                     height="46px" 
                     viewBox="0 0 46 46" 
@@ -46,7 +46,7 @@ export default function GoogleLogin({ clientId }) {
                     <title>btn_google_light_normal_ios</title>
                     <desc>Created with Sketch.</desc>
 
-                    <g id="Google-Button" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Google-Button" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                         <g id="btn_google_light_normal"  transform="translate(-1, -1)">
                             <g id="logo_googleg_48dp" transform="translate(15, 15)">
                                 

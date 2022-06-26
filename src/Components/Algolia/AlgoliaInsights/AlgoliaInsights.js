@@ -1,5 +1,3 @@
-import { createInsightsMiddleware } from 'instantsearch.js/es/middlewares';
-import instantsearch from 'instantsearch.js';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import aa from 'search-insights';
@@ -10,17 +8,14 @@ export default function AlgoliaInsights({ searchClient }) {
     const userAuth = useRecoilValue(userLoginState);
 
     useEffect(()=>{
-        console.log('init ai middleware for ', userAuth.email)
-        const insightsMiddleware = createInsightsMiddleware({
-            insightsClient: aa,
-          });
-          aa('setUserToken', userAuth.email);
-          const searchInstance = instantsearch({
-            indexName: 'CP26C79INL',
-            searchClient: searchClient,
-          });
-          searchInstance.use(insightsMiddleware);
-
+      // Since search-insights@2.0.0, cookie is not used for anonymous user token.
+      // If you wish to continue, you can pass `useCookie: true`.
+      aa('init', {
+        appId: 'CP26C79INL',
+        apiKey: '31c8c44b6cafedf9325e9c1748b215dc'
+      })
+      console.log('init ai middleware for ', userAuth.email)
+      aa('setUserToken', userAuth.email);
     }, [userAuth, searchClient])
 
     return null
