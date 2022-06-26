@@ -17,7 +17,7 @@ const Hit = ({ hit }) => {
     const [selectedBusiness, setSelectedBusiness] = useRecoilState(currentBusinessState);
     const userAuth = useRecoilValue(userLoginState);
     const setHit = useSetRecoilState(searchHitState)
-    
+
     useEffect(()=>{
         setData(hit)
         setHit(hit)
@@ -95,7 +95,7 @@ const Hit = ({ hit }) => {
                         objectIDs: [hit.__position],
                     })
                 } 
-                href={`tel:${selectedBusiness?.business_phone ?? 'Not Available'}`}>{selectedBusiness?.business_phone ?? 'Not Available'}</a>
+                href={`tel:${selectedBusiness?.business_phone ?? '#'}`}>{selectedBusiness?.business_phone ?? 'Not Available'}</a>
             </button>
         </div>
         <div className="px-2 p-2 sm:p-2 w-full lg:w-48">
