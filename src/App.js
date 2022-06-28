@@ -31,6 +31,7 @@ function App() {
     <Configure
       hitsPerPage={10}
       analytics={true}
+      analyticsTags={['47']}
       enablePersonalization={false}
       distinct
       clickAnalytics

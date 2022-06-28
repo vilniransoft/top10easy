@@ -1,7 +1,10 @@
 import { useSearchParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { searchLocationState } from "../../../context/appState";
 
 export default function NoResultsFound({ searchState }){
     let [searchParams, setSearchParams] = useSearchParams();
+    const localFilters = useRecoilValue(searchLocationState)
     const query = searchParams?.get('q') ?? '';
     
     return <section className="py-20 bg-white">
@@ -10,7 +13,7 @@ export default function NoResultsFound({ searchState }){
                 No Results Found for
             </h2>
             <p className="max-w-md mx-auto mt-3 text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-                "{query}"
+                "{query}" in {localFilters.city}, {localFilters.state}
             </p>
             <p className="max-w-md mx-auto mt-3 text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
                 refine your search filters/keywords

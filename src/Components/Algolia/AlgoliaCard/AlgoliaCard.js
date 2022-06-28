@@ -41,14 +41,13 @@ const Hit = ({ hit }) => {
     <div className="h-48 lg:h-auto lg:w-48 self-center flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" >
         <img className="h-48 w-full lg:w-48 object-cover" src={img} alt="Future Business"/>
         { hit?.video_url ? <button className="absolute -m-40 sm:-mt-40 lg:-ml-20 cursor-pointer bg-white rounded-full shadow-md over:shadow-xl m-4" 
-            onClick={ () => {
-                aa('clickedObjectIDsAfterSearch', {
+            onClick={()=>{
+                aa('convertedObjectIDsAfterSearch', {
                     userToken: userAuth.email.split('@')[0],
-                    eventName: 'Business Video Clicked',
-                    index: 'BusinessesPage',
+                    index:  'BusinessesPage',
+                    eventName: 'Call Business from Search',
                     queryID: hit.__queryID,
                     objectIDs: [hit.objectID],
-                    positions: [hit.__position],
                 });
                 displayVideo()}}>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-green-500 hover:text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">

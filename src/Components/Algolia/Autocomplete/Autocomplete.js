@@ -1,12 +1,27 @@
+import { useEffect } from 'react';
 import { connectAutoComplete } from 'react-instantsearch-dom';
+import { useRecoilValue } from 'recoil';
+import aa from 'search-insights';
+import { userLoginState } from '../../../context/appState';
 
-const Autocomplete = ({ elmRef, hasFocus, qryChange, dropSelect, handleSearch, handleFocus, hits, currentRefinement, refine, btnText, placeholder }) => (
 
-  <div className="relative inline-block w-full" ref={elmRef}>
+const Autocomplete = ({ elmRef, hasFocus, qryChange, dropSelect, handleSearch, handleFocus, hits, currentRefinement, refine, btnText, placeholder }) => {
+  const userAuth = useRecoilValue(userLoginState);
+
+  // useEffect(() => {
+  //   index.search('query', {
+  //     clickAnalytics: true
+  //   }).then(({ queryID }) => {
+  //     console.log(queryID);
+  //   });
+  //  console.log(hits)
+  // }, [])
+  
+  return <div className="relative inline-block w-full" ref={elmRef}>
     <div className="flex justify-center">
         <div className="pt-2 relative mx-auto text-gray-600">
                   <input className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-l-lg text-sm focus:outline-none"
-                  type="search" name="search" onFocus={()=>handleFocus()} onChange={(e)=> {qryChange(e.currentTarget.value);refine(e.currentTarget.value)}} placeholder={placeholder}/>
+                  type="search" name="search" onFocus={()=> handleFocus()} onChange={(e)=> {qryChange(e.currentTarget.value);refine(e.currentTarget.value)}} placeholder={placeholder}/>
                   <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
                   <svg className="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                       xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
@@ -18,23 +33,33 @@ const Autocomplete = ({ elmRef, hasFocus, qryChange, dropSelect, handleSearch, h
                   </button>
               </div>
               <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 mt-2 px-4 h-10 rounded-r-lg"
-                      name="submit" onClick={(e) =>{handleSearch(e)}}>
+                      name="submit" onClick={(e) => handleSearch(e)}>
               {btnText}
               </button>
     </div>
     {(hasFocus ?? false) ? 
       <div className="py-2 block z-50 absolute w-3/4 rounded-lg shadow-md bg-white">
         {hits.map(hit => (
-        <div className="block items-center cursor-pointer justify-between truncate w-full hover:bg-green-200" onClick={(e)=> dropSelect(hit)} >
-            <span onFocus={()=> handleFocus()} key={hit.objectID + "title"} className="text-gray-700 block px-4 text-base font-medium  dark:text-gray-400 w-full" role="menuitem" tabIndex="-1">{hit.title}</span>
-        </div>
+          <div className="block items-center cursor-pointer justify-between truncate w-full hover:bg-green-200" 
+          onClick={(e)=> {
+            aa('clickedObjectIDsAfterSearch', {
+              userToken: userAuth.email.split('@')[0],
+              eventName: 'Business Clicked',
+              index: 'BusinessesPage',
+              queryID: hit.__queryID,
+              objectIDs: [hit.objectID],
+              positions: [hit.__position],
+          })
+          ; dropSelect(hit)}} >
+              <span onFocus={()=> handleFocus()} key={hit.objectID + "title"} className="text-gray-700 block px-4 text-base font-medium  dark:text-gray-400 w-full" role="menuitem" tabIndex="-1">{hit.title}</span>
+          </div>
         ))}
     </div>
     :
     null
     }
 </div>
-);
+};
 
 const CustomAutocomplete = connectAutoComplete(Autocomplete);
 
