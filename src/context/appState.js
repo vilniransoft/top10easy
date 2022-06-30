@@ -64,3 +64,8 @@ export const globalSearchFocusState = atom({
   default: false,
   effects_UNSTABLE: [ persistAtom ]
 });
+export const algoliaAnalyticsTags = atom({
+  key: 'algoliaAnalyticsTags',
+  default: [],
+  effects_UNSTABLE: [ persistAtom ]
+});

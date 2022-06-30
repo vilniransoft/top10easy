@@ -15,23 +15,37 @@ import splitbee from '@splitbee/web';
 import { useBusiness, useScrollTop } from './hooks/state';
 import VideoModal from './Components/Utils/VideoModal/VideoModal';
 import AlgoliaInsights from './Components/Algolia/AlgoliaInsights/AlgoliaInsights';
+import { useRecoilValue } from 'recoil';
+import { currentBussinessCategory, localeState, searchLocationState, userLoginState } from './context/appState';
 
 const searchClient = algoliasearch("CP26C79INL", "31c8c44b6cafedf9325e9c1748b215dc");
 
 function App() {
+  const userAuth = useRecoilValue(userLoginState);
+  const category = useRecoilValue(currentBussinessCategory);
+  const locale = useRecoilValue(localeState);
+  const location = useRecoilValue(searchLocationState);
+  //const category = useRecoilValue(currentBussinessCategory);
+
   useBusiness()
   useScrollTop()
   useEffect(()=>{
     splitbee.init()   
   }, [])
 
+  useEffect(() => {
+    
+  }, [])
+  
   return (
     <div className="App">
     <InstantSearch searchClient={searchClient} indexName="BusinessesPage">
     <Configure
       hitsPerPage={10}
       analytics={true}
-      analyticsTags={['47']}
+      analyticsTags={[`user:${userAuth.email}`,`category:${category}`,
+                      `country:${location.country}`, `state:${location.state}`,
+                      `city:${location.city}`, `locale:${locale}`]}
       enablePersonalization={false}
       distinct
       clickAnalytics
