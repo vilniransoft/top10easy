@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import AlgoliaSearchBox from "../../Algolia/AlgoliaSearchBox/AlgoliaSearchBox";
 import Dropdown from "../../Utils/Dropdown/Dropdown";
-import { Configure } from 'react-instantsearch-dom';
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { searchViewState } from "../../../context/appState";

@@ -1,18 +1,34 @@
-import { useState } from "react"
-import { useHistory } from "react-router";
+import { useState, useEffect } from "react"
+import { useNavigate  } from "react-router";
+import splitbee from '@splitbee/web';
+import { useRecoilValue, useRecoilState } from "recoil";
+import { localeState, searchQueryState } from "../../../context/appState";
+import locales from "../../../locales/locales";
 
 export default function Search(){
-    const history = useHistory('');
+    const navigate = useNavigate('');
     const [query, setQuery] = useState('');
+    const currentLocale = useRecoilValue(localeState)
+    const [searchText, setSearchText] = useState(locales[currentLocale]?.utils?.search)
+    const [queryState, setQueryState] = useRecoilState(searchQueryState)
+
+    useEffect(() => {
+        setSearchText(locales[currentLocale]?.utils?.search)
+    }, [currentLocale])
 
     const handleQueryChange = (event) =>{
         setQuery(event.target.value);
+        const updateQueryState = {...queryState, query: event.target.value }
+        setQueryState(updateQueryState)
     }
 
     const handleSearch = (event) =>{
         const target = event?.target?.name ?? '';
         if (event.keyCode === 13 || target === 'submit') {
-            history.push(`search?q=${query}`);
+            navigate(`search?q=${query}`);
+            splitbee.track(`query`, {
+                type: query
+            })
           }
     }
 
@@ -32,9 +48,7 @@ export default function Search(){
             </div>
             <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 mt-2 px-4 h-10 rounded-r-lg"
                     name="submit" onClick={(e) =>{handleSearch(e)}}>
-            Search
+            {searchText?.button}
             </button>
-        </div>
-        
-                        
+        </div>               
 }

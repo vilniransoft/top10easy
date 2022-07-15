@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router"
-import { currentBusinessState } from "../../../context/appState";
-import { useRecoilState } from "recoil";
+import { currentBusinessState, localeState, searchHitState, userLoginState } from "../../../context/appState";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useBusiness } from "../../../hooks/state";
 import Stars from "../../Utils/Stars/Stars";
 import GoogleMapReact from 'google-map-react';
 import MapBusinessMarker from "../../Utils/MapBusinessMarker/MapBusinessMarker";
+import aa from 'search-insights';
 
+// Default workhours
 const weekHours = [
     {day: 'Monday', hours: '9:00 AM - 10:00 PM'},
     {day: 'Tuesday', hours: '9:00 AM - 10:00 PM'},
@@ -19,27 +21,32 @@ const weekHours = [
 export default function Business(){
     const days = {1: 'Monday', 2:'Tuesday', 3:'Wednesday', 4:'Thursday', 5:'Friday', 6:'Saturday', 7:'Sunday' }
     const [selectedBusiness, setSelectedBusiness] = useRecoilState(currentBusinessState);
+    const currentLocale = useRecoilValue(localeState)
+    const userAuth = useRecoilValue(userLoginState);
     const [workDays, setWorkDays] = useState(weekHours)
-    let params = useParams()
+    const hit = useRecoilValue(searchHitState)
+    let params = useParams();
+
     useBusiness()
     useEffect(()=>{
         async function getBusiness(){
-            const url = `https://top10ezlistings.herokuapp.com/api/rest/business/${params?.name}`
-            const serverRes = await fetch(url)
+            // the url is temporary need to change once certs have been properly configured
+            const url = `https://top10cms.link/api/v2/pages/?fields=*&type=businesses.BusinessesPage&slug=${params?.name}&locale=${currentLocale}`
+            const serverRes = await fetch(url);
             const business = await serverRes.json()
-            if(Object.values(business?.businesses_businessespage[0].businesses_businesshoursorderables).length > 0){
-                setWorkDays(Object.values(business?.businesses_businessespage[0]?.businesses_businesshoursorderables).map( hrs => {
-                    return { day: hrs?.businesses_businesshour?.weekday ?? '', 
-                            hours: (!hrs?.businesses_businesshour.closed) ? `${hrs?.businesses_businesshour?.from_hour.substring(0, hrs?.businesses_businesshour?.from_hour?.length - 3) ?? ''} - ${hrs?.businesses_businesshour?.to_hour?.substring(0, hrs?.businesses_businesshour?.to_hour?.length - 3) ?? ''}` : '-- CLOSED --'
-                                }
-                            }))
+            if(business?.items?.[0]?.businesses_businesshoursorderables){
+                if(Object.values(business?.items?.[0]?.businesses_businesshoursorderables)?.length > 0){
+                    setWorkDays(Object.values(business?.items?.[0]?.businesses_businesshoursorderables)?.map( hrs => {
+                        return { day: hrs?.businesses_businesshour?.weekday ?? '', 
+                                hours: (!hrs?.businesses_businesshour?.closed) ? `${hrs?.businesses_businesshour?.from_hour?.substring(0, hrs?.businesses_businesshour?.from_hour?.length - 3) ?? ''} - ${hrs?.businesses_businesshour?.to_hour?.substring(0, hrs?.businesses_businesshour?.to_hour?.length - 3) ?? ''}` : '-- CLOSED --'
+                                    }
+                                }))
+                }
             }
-            setSelectedBusiness({...business?.businesses_businessespage[0], ...business?.businesses_businessespage[0]?.wagtailcore_page})
-           
+            setSelectedBusiness(business?.items?.[0]);
         }
-        getBusiness()
-    }, [])
-    
+        getBusiness();
+    }, [currentLocale, setSelectedBusiness, params?.name])   
 
     const getStars = ()=>{
         return (selectedBusiness?.business_stars) ? <Stars stars={selectedBusiness?.business_stars}/> :''
@@ -53,7 +60,7 @@ export default function Business(){
             <div className="flex flex-col items-center sm:px-5 md:flex-row">
                 <div className="w-full md:w-1/2">
                     <a href="#_" className="block">
-                        <img className="object-cover w-full h-full rounded-lg max-h-64 sm:max-h-96" src="https://cdn.devdojo.com/images/may2021/cupcakes.jpg" alt="Savory Cupcakes" />
+                        <img className="object-cover w-full h-full rounded-lg max-h-64 sm:max-h-96" src={(selectedBusiness?._image_url) ? selectedBusiness?._image_url : "https://cdn.devdojo.com/images/may2021/cupcakes.jpg"} alt="Savory Cupcakes" />
                     </a>
                 </div>
                 <div className="flex flex-col items-start justify-center w-full h-full py-6 mb-6 md:mb-0 md:w-1/2">
@@ -62,14 +69,24 @@ export default function Business(){
                         <h1 className="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl"><a href="#_">{selectedBusiness?.title ?? 'Mme Cupcake'}</a></h1>
                         <div className="flex flex-row items-start justify-center ">
                         <div className="text-sm text-gray-600 flex items-center align-center">
-                            {getStars()}
+                            { getStars() }
                             </div>
                             <span className="mt-1 pl-1">({selectedBusiness?.business_reviews} )Reviews</span>
                         </div>
                         <div className="flex flex-col lg:flex-row items-center w-full ">
         <div className="px-2 p-3 sm:p-2 w-full lg:w-48">
             <button className="bg-gray-200 w-full hover:bg-gray-400 font-bold py-2 px-4 rounded text-black">
-                <span className="text-black">{selectedBusiness?.business_phone ?? '123656789'}</span>
+                <a className="text-black"
+                onClick={()=>
+                    aa('convertedObjectIDsAfterSearch', {
+                        userToken: userAuth.email.split('@')[0],
+                        index:  'BusinessesPage',
+                        eventName: 'Call Business from Search',
+                        queryID: hit.__queryID,
+                        objectIDs: [hit.objectID],
+                    })
+                }
+                href={`tel:${selectedBusiness?.business_phone ?? '#'}`}>{selectedBusiness?.business_phone ?? 'Not Available'}</a>
             </button>
         </div>
         <div className="px-2 p-2 sm:p-2 w-full lg:w-48">
@@ -132,7 +149,7 @@ export default function Business(){
                                 { workDays.map( (day, idx)=>{
                                     return <li key={idx} className="box-border relative py-1 pl-0 text-left text-gray-500 border-solid cursor-pointer hover:text-green-400">
                                     <span className="inline-flex items-center justify-center w-6 h-6 mr-2"><span className="text-sm font-bold">{days[day.day]}</span></span> 
-                                    <span className="ml-24">{(day.colsed)? '--- closed ---':day.hours}</span>
+                                    <span className="ml-24">{(day?.colsed)? '--- closed ---':day?.hours}</span>
                                 </li>
                                 })}
                             
