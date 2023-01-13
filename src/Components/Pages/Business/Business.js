@@ -30,16 +30,15 @@ export default function Business(){
     useBusiness()
     useEffect(()=>{
         async function getBusiness(){
+            // the url is temporary need to change once certs have been properly configured
             const url = `https://top10cms.link/api/v2/pages/?fields=*&type=businesses.BusinessesPage&slug=${params?.name}&locale=${currentLocale}`
             const serverRes = await fetch(url);
             const business = await serverRes.json()
-            
-            if(business?.items?.[0]?.business_hours){
-                if(Object.values(business?.items?.[0]?.business_hours)?.length > 0){
-                    const sorted_business_hours = business?.items?.[0]?.business_hours.sort((a,b) => a.business_weekday - b.business_weekday);
-                    setWorkDays(Object.values(sorted_business_hours)?.map( hrs => {
-                        return { day: hrs?.business_weekday ?? '', 
-                                hours: (!hrs?.business_closed) ? `${hrs?.business_from_hours?.substring(0, hrs?.business_from_hours?.length - 3) ?? ''} - ${hrs?.business_to_hours?.substring(0, hrs?.business_to_hours?.length - 3) ?? ''}` : '-- CLOSED --'
+            if(business?.items?.[0]?.businesses_businesshoursorderables){
+                if(Object.values(business?.items?.[0]?.businesses_businesshoursorderables)?.length > 0){
+                    setWorkDays(Object.values(business?.items?.[0]?.businesses_businesshoursorderables)?.map( hrs => {
+                        return { day: hrs?.businesses_businesshour?.weekday ?? '', 
+                                hours: (!hrs?.businesses_businesshour?.closed) ? `${hrs?.businesses_businesshour?.from_hour?.substring(0, hrs?.businesses_businesshour?.from_hour?.length - 3) ?? ''} - ${hrs?.businesses_businesshour?.to_hour?.substring(0, hrs?.businesses_businesshour?.to_hour?.length - 3) ?? ''}` : '-- CLOSED --'
                                     }
                                 }))
                 }
