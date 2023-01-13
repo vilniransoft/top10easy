@@ -10,6 +10,7 @@ import EzSearch from './Components/Pages/EzSearch/EzSearch';
 import Contact from './Components/Pages/Contact/Contact';
 import Business from './Components/Pages/Business/Business';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom'
 import Privacy from './Components/Pages/Privacy/Privacy';
 import splitbee from '@splitbee/web';
 import { useBusiness, useScrollTop } from './hooks/state';
@@ -25,6 +26,7 @@ function App() {
   const category = useRecoilValue(currentBussinessCategory);
   const locale = useRecoilValue(localeState);
   const location = useRecoilValue(searchLocationState);
+  const pageLocation = useLocation();
   const [cityImage, setImage] = useState("https://imgs.search.brave.com/1uPRuEUMN-y1Ww06gL6B0E2cU6foFSxQvIkqmIxNQKc/rs:fit:1158:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5u/ck9nSnF1dUJTT2Ry/Tjl6dU1iZU93SGFE/QyZwaWQ9QXBp");
   //const category = useRecoilValue(currentBussinessCategory);
   const stateLocation = useRecoilValue(searchLocationState);
@@ -36,8 +38,8 @@ function App() {
   }, [])
 
   useEffect(() => {
-    console.log(stateLocation)
-  }, [stateLocation])
+    console.log(pageLocation.pathname)
+  }, [pageLocation])
   
   return (
     <div className="App">
@@ -56,9 +58,8 @@ function App() {
         <Navigation></Navigation>
       </header>
       <div className="main">
-      <div style={{backgroundImage: `url("${stateLocation?.cityImgUrl ?? 'https://top10ezdevbucket221148-dev.s3.amazonaws.com/original_images/O2.jpg'}")`}} className="city-image-banner bg-gray-400 w-full h-72 bg-no-repeat bg-cover">
-
-      </div>
+      { pageLocation.pathname === '/' ? <div style={{backgroundImage: `url("${stateLocation?.cityImgUrl ?? 'https://top10ezdevbucket221148-dev.s3.amazonaws.com/original_images/O2.jpg'}")`}} className="city-image-banner bg-gray-400 w-full h-72 bg-no-repeat bg-cover">
+      </div> : null }
       <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/about" element={<About/>} />
