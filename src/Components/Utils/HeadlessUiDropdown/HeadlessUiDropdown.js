@@ -31,12 +31,14 @@ export default function HeadlessUiDropdown() {
       const serverRes = await fetch(url);
       const business = await serverRes.json();
       if(business){
+        console.log(business)
         const businessLocations = business?.items.map( loc => { return {
           label: `${loc?.state_abbreviation}, ${loc?.city}`,
           country: loc?.country,
           city: loc?.city,
           state: loc?.state,
-          stateAb: loc?.state_abbreviation
+          stateAb: loc?.state_abbreviation,
+          cityImgUrl: loc?._city_image_url
         }})
         const businessUniqueLabel = [...new Map(businessLocations.map(item =>
           [item['label'], item])).values()];
