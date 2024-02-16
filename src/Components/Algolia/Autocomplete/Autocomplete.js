@@ -8,6 +8,11 @@ import { userLoginState } from '../../../context/appState';
 const Autocomplete = ({ elmRef, hasFocus, qryChange, dropSelect, handleSearch, handleFocus, hits, currentRefinement, refine, btnText, placeholder }) => {
   const userAuth = useRecoilValue(userLoginState);
 
+
+    useEffect(() => {
+        console.log(hits)
+    }, [hits]);
+
   // useEffect(() => {
   //   index.search('query', {
   //     clickAnalytics: true
@@ -38,9 +43,9 @@ const Autocomplete = ({ elmRef, hasFocus, qryChange, dropSelect, handleSearch, h
               </button>
     </div>
     {(hasFocus ?? false) ? 
-      <div className="py-2 block z-50 absolute w-3/4 rounded-lg shadow-md bg-white">
+      <div className="py-2 list-drop-evr-main  block z-50 absolute w-3/4 rounded-lg shadow-md bg-white">
         {hits.map(hit => (
-          <div className="block items-center cursor-pointer justify-between truncate w-full hover:bg-green-200" 
+          <div className="block p-3 list-drop-evr items-center cursor-pointer justify-between truncate w-full hover:bg-green-200"
           onClick={(e)=> {
             aa('clickedObjectIDsAfterSearch', {
               userToken: userAuth.email.split('@')[0],

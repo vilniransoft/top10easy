@@ -9,7 +9,7 @@ const locationOptions = [
     {label: 'Raleigh, NC', country: 'united states', city: 'Raleigh', state: 'North Carolina', stateAb: 'NC',  active: true},
     {label: 'San Francisco, CA', country: 'united states', city: 'San Francisco', state: 'California', stateAb: 'CA', active: false}
 ]
-export default function HeadlessUiDropdown() {
+export default function HeadlessUiDropdown(props = null) {
   const [selected, setSelected] = useState([])
   const [locations, setLocations] = useState([{
     label: "NC, Raleigh",
@@ -61,10 +61,20 @@ export default function HeadlessUiDropdown() {
             type: selected.state
         })
         setStateLocation(selected)
-    }, [selected, setStateLocation])  
+
+    }, [selected, setStateLocation])
+
+    const changingCity = (data) => {
+      setSelected(data)
+        if(props) {
+            props.selectingCity(true);
+        }
+    }
+
+
   return (
-    <div className="w-full sm:w-42 sm:p-4">
-      <Listbox value={selected} onChange={setSelected}>
+    <div className="w-full" style={{marginBottom:"100px"}}>
+      <Listbox value={selected} onChange={changingCity}>
         <div className="relative mt-1">
           <Listbox.Button className="inline-flex items-center w-full py-2 pl-3 pr-8 bg-white border-2 rounded-lg cursor-pointer city-filter">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -98,7 +108,7 @@ export default function HeadlessUiDropdown() {
                   {({ selected, active }) => (
                     <>
                       <span
-                        className={`${
+                        className={` ${
                           selected ? 'font-medium' : 'font-normal'
                         } block truncate`}
                       >

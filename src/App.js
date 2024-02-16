@@ -32,13 +32,13 @@ function App() {
   useBusiness()
   useScrollTop()
   useEffect(()=>{
-    splitbee.init()   
+    splitbee.init()
   }, [])
 
   useEffect(() => {
     console.log(stateLocation)
   }, [stateLocation])
-  
+
   return (
     <div className="App">
     <InstantSearch searchClient={searchClient} indexName="BusinessesPage">
@@ -56,8 +56,7 @@ function App() {
         <Navigation></Navigation>
       </header>
       <div className="main">
-      <div style={{backgroundImage: `url("${stateLocation?.cityImgUrl ?? 'https://top10ezdevbucket221148-dev.s3.amazonaws.com/original_images/O2.jpg'}")`}} className="city-image-banner bg-gray-400 w-full h-72 bg-no-repeat bg-cover">
-
+      <div style={{backgroundImage: `url("/BbA476.jpg")`, height:'100vh'}} className="city-image-banner bg-gray-400 w-full  bg-no-repeat bg-cover">
       </div>
       <Routes>
           <Route exact path="/" element={<Home />} />
