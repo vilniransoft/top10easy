@@ -38,7 +38,7 @@ const Autocomplete = ({ elmRef, hasFocus, qryChange, dropSelect, handleSearch, h
                   </button>
               </div>
               <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 mt-2 px-4 h-10 rounded-r-lg"
-                      name="submit" onClick={(e) => handleSearch(e)}>
+                      name="submit" onClick={(e) => handleSearch(e)} onFocus={()=> handleFocus()}>
               {btnText}
               </button>
     </div>
