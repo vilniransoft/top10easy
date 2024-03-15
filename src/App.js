@@ -56,7 +56,7 @@ function App() {
         <Navigation></Navigation>
       </header>
       <div className="main">
-      <div style={{backgroundImage: `url("/BbA476.jpg")`, height:'100vh'}} className="city-image-banner bg-gray-400 w-full  bg-no-repeat bg-cover">
+      <div style={{backgroundImage: `url("/02Main.jpg")`, backgroundRepeat: 'no-repeat',backgroundPosition: 'center center', backgroundSize: 'cover',  height: '45vh'}} className="city-image-banner bg-gray-400 w-full  bg-no-repeat bg-cover">
       </div>
       <Routes>
           <Route exact path="/" element={<Home />} />
