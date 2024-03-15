@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { localeState } from "../../../context/appState";
 import AlgoliaBusinessSectors from "../../Algolia/AlgoliaBusinessSectors/AlgoliaBusinessSectors";
+import "./Home.css";
 
 export default function Home(){
     const currentLocale = useRecoilValue(localeState);
