@@ -58,7 +58,7 @@ function App() {
         <Navigation></Navigation>
       </header>
       <div className="main">
-      { pageLocation.pathname === '/' ? <div style={{backgroundImage: `url("${stateLocation?.cityImgUrl ?? 'https://top10ezdevbucket221148-dev.s3.amazonaws.com/original_images/O2.jpg'}")`, backgroundRepeat: 'no-repeat',backgroundPosition: 'center center', backgroundSize: 'cover',  height: '45vh'}} className="city-image-banner bg-gray-400 w-full h-72 bg-no-repeat bg-cover">
+      { pageLocation.pathname === '/' ? <div style={{backgroundImage: `url("${stateLocation?.cityImgUrl ?? 'https://top10ezdevbucket221148-dev.s3.amazonaws.com/original_images/02main-new.png'}")`, backgroundRepeat: 'no-repeat',backgroundPosition: 'center center', backgroundSize: 'cover',  height: '45vh'}} className="city-image-banner bg-gray-400 w-full h-72 bg-no-repeat bg-cover">
       </div> : null } 
       <Routes>
           <Route exact path="/" element={<Home />} />
