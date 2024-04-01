@@ -61,7 +61,7 @@ export default function HeadlessUiDropdown() {
         setStateLocation(selected)
     }, [selected, setStateLocation])  
   return (
-    <div className="w-full sm:w-42 sm:p-4">
+    <div className="w-full sm:w-42 sm:p-0 sm:pb-4">
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1 mapouter">
           <Listbox.Button className="inline-flex items-center w-full py-2 pl-3 pr-8 bg-white border-2 rounded-lg cursor-pointer city-filter">
