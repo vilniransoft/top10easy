@@ -14,7 +14,7 @@ const businessCategories = algoliasearch("CP26C79INL", "31c8c44b6cafedf9325e9c17
 
 const businessCategoryClient = {
   search(requests){
-    console.log(requests)
+    console.log(requests,'requestsss')
 
     let algoliaPromise = businessCategories.search(requests)
     return algoliaPromise
@@ -31,8 +31,15 @@ export default function AlgoliaBusinessSectors(props) {
   const navigate = useNavigate();
   const elmRef = useRef(null);
   const [hasFocus, setHasFocus] = useRecoilState(globalSearchFocusState)
+
+  useEffect(()=>{
+    if(props?.optionSelected){
+      setHasFocus(true)
+    }else {setHasFocus(false)}
+  },[props?.optionSelected])
+
   useLoseFocus(elmRef)
-  
+
     useEffect(() => {
       setLocaleText(locales[currentLocale]?.value)
     }, [currentLocale])
