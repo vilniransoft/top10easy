@@ -10,10 +10,7 @@ import EzSearch from './Components/Pages/EzSearch/EzSearch';
 import Contact from './Components/Pages/Contact/Contact';
 import Business from './Components/Pages/Business/Business';
 import { useEffect, useState } from 'react';
-<<<<<<< HEAD
 import { useLocation } from 'react-router-dom'
-=======
->>>>>>> 597d3bda75333927ca357269603eeadfdbba2aaa
 import Privacy from './Components/Pages/Privacy/Privacy';
 import splitbee from '@splitbee/web';
 import { useBusiness, useScrollTop } from './hooks/state';
@@ -29,10 +26,7 @@ function App() {
   const category = useRecoilValue(currentBussinessCategory);
   const locale = useRecoilValue(localeState);
   const location = useRecoilValue(searchLocationState);
-<<<<<<< HEAD
   const pageLocation = useLocation();
-=======
->>>>>>> 597d3bda75333927ca357269603eeadfdbba2aaa
   const [cityImage, setImage] = useState("https://imgs.search.brave.com/1uPRuEUMN-y1Ww06gL6B0E2cU6foFSxQvIkqmIxNQKc/rs:fit:1158:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5u/ck9nSnF1dUJTT2Ry/Tjl6dU1iZU93SGFE/QyZwaWQ9QXBp");
   //const category = useRecoilValue(currentBussinessCategory);
   const stateLocation = useRecoilValue(searchLocationState);
