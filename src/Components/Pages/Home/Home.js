@@ -8,15 +8,9 @@ import AlgoliaBusinessSectors from "../../Algolia/AlgoliaBusinessSectors/Algolia
 import "./Home.css";
 
 export default function Home(){
-<<<<<<< HEAD
-    const currentLocale = useRecoilValue(localeState);
-    const [homeText, setHomeText] = useState(locales[currentLocale]?.home);
-    const [isCitySelected, setIsCitySelected] = useState(false);
-=======
     const currentLocale = useRecoilValue(localeState)
     const [homeText, setHomeText] = useState(locales[currentLocale]?.home)
     const [optionSelected , setOptionSelected] = useState({})
->>>>>>> 187c1c724a3ca58e983bb50bf7df491b075be588
 
     useEffect(() => {
         setHomeText(locales[currentLocale]?.home)
@@ -30,21 +24,9 @@ export default function Home(){
             <div className="container max-w-lg py-3 mx-auto text-left md:max-w-none md:text-center">
                 <h1 className="text-3xl md:text-5xl p-2 md:p-8 font-extrabold leading-10 tracking-tight text-left text-gray-900 md:text-center sm:leading-none md:text-6xl lg:text-7xl p-6"><span className="inline md:block">{homeText?.h1Top}</span> <span className="relative mt-2 text-transparent bg-clip-text bg-gradient-to-br from-green-500 to-green-400 md:inline-block pb-4">{homeText?.h1Bottom}</span></h1>
                 <div className="flex flex-col items-center mt-4 sm:mt-12 text-center">
-<<<<<<< HEAD
-                    <div className="flex flex-col-reverse md:flex-row items-center">
-                        <div className={'row'}>
-                            <div className={'col-12 w-full mb-5'}>
-                                <HeadlessUiDropdown selectingCity={(t) => setIsCitySelected(t)} />
-                            </div>
-                            <div className={'col-12 w-full mt-5'}>
-                                <AlgoliaBusinessSectors cityChanged = {isCitySelected} />
-                            </div>
-                        </div>
-=======
                     <div className="flex-col-reverse md:flex-row items-center">
                         <HeadlessUiDropdown setOptionSelected={setOptionSelected} />
                         <AlgoliaBusinessSectors optionSelected={optionSelected} />
->>>>>>> 187c1c724a3ca58e983bb50bf7df491b075be588
                     </div>
                 </div>
             </div>
