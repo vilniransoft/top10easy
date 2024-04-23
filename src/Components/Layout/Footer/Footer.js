@@ -19,7 +19,7 @@ export default function Footer(){
 
     },[userAuth])
     
-    return  <section className="bg-white">
+    return  <section style={{marginTop: '70px'}} className="bg-white ">
             {(!userAuth.authenticated) ? <GoogleLogin clientId='755311199624-tghah0qnsk7aqk44d8q90ivk3uhmc680.apps.googleusercontent.com' /> 
                                         : <GoogleLogout clientId='755311199624-tghah0qnsk7aqk44d8q90ivk3uhmc680.apps.googleusercontent.com'/>}
         <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8 flex flex-col align-center">
