@@ -10,7 +10,10 @@ import EzSearch from './Components/Pages/EzSearch/EzSearch';
 import Contact from './Components/Pages/Contact/Contact';
 import Business from './Components/Pages/Business/Business';
 import { useEffect, useState } from 'react';
+<<<<<<< HEAD
 import { useLocation } from 'react-router-dom'
+=======
+>>>>>>> 597d3bda75333927ca357269603eeadfdbba2aaa
 import Privacy from './Components/Pages/Privacy/Privacy';
 import splitbee from '@splitbee/web';
 import { useBusiness, useScrollTop } from './hooks/state';
@@ -26,7 +29,10 @@ function App() {
   const category = useRecoilValue(currentBussinessCategory);
   const locale = useRecoilValue(localeState);
   const location = useRecoilValue(searchLocationState);
+<<<<<<< HEAD
   const pageLocation = useLocation();
+=======
+>>>>>>> 597d3bda75333927ca357269603eeadfdbba2aaa
   const [cityImage, setImage] = useState("https://imgs.search.brave.com/1uPRuEUMN-y1Ww06gL6B0E2cU6foFSxQvIkqmIxNQKc/rs:fit:1158:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5u/ck9nSnF1dUJTT2Ry/Tjl6dU1iZU93SGFE/QyZwaWQ9QXBp");
   //const category = useRecoilValue(currentBussinessCategory);
   const stateLocation = useRecoilValue(searchLocationState);
@@ -34,13 +40,13 @@ function App() {
   useBusiness()
   useScrollTop()
   useEffect(()=>{
-    splitbee.init()   
+    splitbee.init()
   }, [])
 
   useEffect(() => {
-    console.log(pageLocation.pathname)
-  }, [pageLocation])
-  
+    console.log(stateLocation)
+  }, [stateLocation])
+
   return (
     <div className="App">
     <InstantSearch searchClient={searchClient} indexName="BusinessesPage">
@@ -58,8 +64,8 @@ function App() {
         <Navigation></Navigation>
       </header>
       <div className="main">
-      { pageLocation.pathname === '/' ? <div style={{backgroundImage: `url("${stateLocation?.cityImgUrl ?? 'https://top10ezdevbucket221148-dev.s3.amazonaws.com/original_images/O2.jpg'}")`}} className="city-image-banner bg-gray-400 w-full h-72 bg-no-repeat bg-cover">
-      </div> : null } ~
+      <div style={{backgroundImage: `url("https://top10ezdevbucket221148-dev.s3.amazonaws.com/images/BBA476.max-800x600.jpg")`, backgroundRepeat: 'no-repeat',backgroundPosition: 'center center', backgroundSize: 'cover',  height: '45vh'}} className="city-image-banner bg-gray-400 w-full  bg-no-repeat bg-cover">
+      </div>
       <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/about" element={<About/>} />

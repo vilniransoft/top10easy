@@ -28,3 +28,14 @@ code {
       opacity: 1;
   }
 }
+
+.list-drop-evr {
+  border-bottom: 0.5px solid rgb(128, 128, 128);
+}
+
+.list-drop-evr-main {
+  display: block;
+  height: 300px;
+  overflow-y: auto;
+  scroll-behavior: auto;
+}
