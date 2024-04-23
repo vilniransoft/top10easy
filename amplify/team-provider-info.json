@@ -15,6 +15,9 @@
       "auth": {
         "top10ezdev95b6f6ab": {},
         "true": {}
+      },
+      "storage": {
+        "top10s3": {}
       }
     }
   }
