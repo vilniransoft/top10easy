@@ -59,7 +59,7 @@ function App() {
       </header>
       <div className="main">
       { pageLocation.pathname === '/' ? <div style={{backgroundImage: `url("${stateLocation?.cityImgUrl ?? 'https://top10ezdevbucket221148-dev.s3.amazonaws.com/original_images/O2.jpg'}")`}} className="city-image-banner bg-gray-400 w-full h-72 bg-no-repeat bg-cover">
-      </div> : null } 
+      </div> : null } ~
       <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/about" element={<About/>} />
