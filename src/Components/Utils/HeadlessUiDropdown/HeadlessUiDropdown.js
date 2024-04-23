@@ -9,10 +9,23 @@ const locationOptions = [
     {label: 'Raleigh, NC', country: 'united states', city: 'Raleigh', state: 'North Carolina', stateAb: 'NC',  active: true},
     {label: 'San Francisco, CA', country: 'united states', city: 'San Francisco', state: 'California', stateAb: 'CA', active: false}
 ]
+<<<<<<< HEAD
 export default function HeadlessUiDropdown(props = null) {
+=======
+export default function HeadlessUiDropdown(props) {
+>>>>>>> 187c1c724a3ca58e983bb50bf7df491b075be588
   const [selected, setSelected] = useState([])
   const [locations, setLocations] = useState([{
     label: "NC, Raleigh",
+    country: "US",
+    state: "North Carolina",
+    state_abbreviation: "NC",
+    city: "Raleigh",
+    city_longitude: -71.4817753,
+    city_latitude: 46.856283,
+    active: true
+  },{
+    label: "NC, Raleigh1",
     country: "US",
     state: "North Carolina",
     state_abbreviation: "NC",
@@ -50,6 +63,8 @@ export default function HeadlessUiDropdown(props = null) {
     setSelected(locations[0])
   },[])
 
+
+
     useEffect(()=>{
         splitbee.track(`city_filter`, {
             type: selected.city
@@ -61,6 +76,7 @@ export default function HeadlessUiDropdown(props = null) {
             type: selected.state
         })
         setStateLocation(selected)
+<<<<<<< HEAD
 
     }, [selected, setStateLocation])
 
@@ -75,6 +91,18 @@ export default function HeadlessUiDropdown(props = null) {
   return (
     <div className="w-full" style={{marginBottom:"100px"}}>
       <Listbox value={selected} onChange={changingCity}>
+=======
+    }, [selected, setStateLocation])  
+
+    const handleOnchange=(e)=>{
+        setSelected(e)
+        props?.setOptionSelected(e)
+    }
+    
+  return (
+    <div className="w-full sm:w-42 sm:p-0 sm:pb-4">
+      <Listbox value={selected} onChange={handleOnchange}>
+>>>>>>> 187c1c724a3ca58e983bb50bf7df491b075be588
         <div className="relative mt-1 mapouter">
           <Listbox.Button className="inline-flex items-center w-full py-2 pl-3 pr-8 bg-white border-2 rounded-lg cursor-pointer city-filter">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

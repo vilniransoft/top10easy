@@ -11,14 +11,20 @@ import {useLoseFocus} from '../../../hooks/state';
 const businessCategories = algoliasearch("CP26C79INL", "31c8c44b6cafedf9325e9c1748b215dc");
 
 const businessCategoryClient = {
+<<<<<<< HEAD
     search(requests) {
         console.log(requests)
+=======
+  search(requests){
+    console.log(requests,'requestsss')
+>>>>>>> 187c1c724a3ca58e983bb50bf7df491b075be588
 
         let algoliaPromise = businessCategories.search(requests)
         return algoliaPromise
     }
 }
 export default function AlgoliaBusinessSectors(props) {
+<<<<<<< HEAD
     const currentLocale = useRecoilValue(localeState);
     const [localeText, setLocaleText] = useState(locales[currentLocale]?.value);
     const [category, setCategory] = useRecoilState(currentBussinessCategory);
@@ -31,6 +37,26 @@ export default function AlgoliaBusinessSectors(props) {
     const [hasFocus, setHasFocus] = useRecoilState(globalSearchFocusState)
     const [cityChangedFirst, setCityChangedFirst] = useState(true)
     useLoseFocus(elmRef)
+=======
+  const currentLocale = useRecoilValue(localeState);
+  const [localeText, setLocaleText] = useState(locales[currentLocale]?.value);
+  const [category, setCategory] = useRecoilState(currentBussinessCategory);
+  const [searchText, setSearchText] = useState(locales[currentLocale]?.utils?.search);
+  const [showSuggestions, setShowSuggestions] = useState(false)
+  const [qryTerm, setQryTerm] = useState('');
+  const [placeholder, setPlaceholder] = useState(locales[currentLocale]?.utils?.placeholder)
+  const navigate = useNavigate();
+  const elmRef = useRef(null);
+  const [hasFocus, setHasFocus] = useRecoilState(globalSearchFocusState)
+
+  useEffect(()=>{
+    if(props?.optionSelected){
+      setHasFocus(true)
+    }else {setHasFocus(false)}
+  },[props?.optionSelected])
+
+  useLoseFocus(elmRef)
+>>>>>>> 187c1c724a3ca58e983bb50bf7df491b075be588
 
     useEffect(() => {
         setLocaleText(locales[currentLocale]?.value)
