@@ -21,7 +21,7 @@ export default function Footer() {
 
     return <section style={{ marginTop: '70px' }} className="bg-white ">
         {/* {(!userAuth.authenticated) ? <GoogleLogin clientId='755311199624-tghah0qnsk7aqk44d8q90ivk3uhmc680.apps.googleusercontent.com' />
-            : <GoogleLogout clientId='755311199624-tghah0qnsk7aqk44d8q90ivk3uhmc680.apps.googleusercontent.com' />}
+            : <GoogleLogout clientId='755311199624-tghah0qnsk7aqk44d8q90ivk3uhmc680.apps.googleusercontent.com' />} */}
         <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8 flex flex-col align-center">
             <img src={logo} alt="Top10easy" className="w-24 self-center" />
             <nav className="flex flex-wrap justify-center -mx-5 -my-2">
@@ -55,6 +55,9 @@ export default function Footer() {
                         Privacy
                     </Link>
                 </div>
+                {/* <Link to="/contact" className="bottom-0 mb-2 bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent flex-nowrap rounded-lg">
+                    {labels?.submitBis}
+                </Link> */}
             </nav>
             <div className="flex justify-center mt-8 space-x-6">
                 <Link to="/#" className="text-gray-400 hover:text-gray-500">
@@ -81,7 +84,7 @@ export default function Footer() {
             <p className="mt-8 text-base leading-6 text-center text-gray-400">
                 © 2021 Top10easy, Inc. All rights reserved.
             </p>
-        </div> */}
+        </div>
     </section>
 
 }
