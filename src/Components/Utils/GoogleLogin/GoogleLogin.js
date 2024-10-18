@@ -1,4 +1,4 @@
-import { useGoogleLogin } from 'react-google-login';
+// import { useGoogleLogin } from 'react-google-login';
 import { useRecoilState } from 'recoil';
 import { userLoginState } from '../../../context/appState';
 import { refreshTokenSetup } from '../RefreshToken/RefreshToken';
@@ -24,19 +24,19 @@ export default function GoogleLogin({ clientId }) {
         console.log('Login failed: res:', res);
       };
     
-      const {signIn} = useGoogleLogin({
-        onSuccess,
-        onFailure,
-        clientId,
-        isSignedIn: true,
-        accessType: 'offline',
-        // responseType: 'code',
-        // prompt: 'consent',
-      });
+      // const {signIn} = useGoogleLogin({
+      //   onSuccess,
+      //   onFailure,
+      //   clientId,
+      //   isSignedIn: true,
+      //   accessType: 'offline',
+      //   // responseType: 'code',
+      //   // prompt: 'consent',
+      // });
     
       return (
           <div className="shadow-md w-48 rounded-md fixed bottom-0 left-0 mb-6 ml-6 bg-white">
-            <button onClick={() => signIn() } className="button flex items-center">
+            {/* <button onClick={() => signIn() } className="button flex items-center">
             <div>
                 <svg 
                     className="centerHV" 
@@ -65,7 +65,7 @@ export default function GoogleLogin({ clientId }) {
                 </svg>
             </div>
             <span className="buttonText">Sign in with Google</span>
-            </button>
+            </button> */}
         </div>
       );
     }

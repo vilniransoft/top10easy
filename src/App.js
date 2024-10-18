@@ -33,44 +33,40 @@ function App() {
 
   useBusiness()
   useScrollTop()
-  useEffect(()=>{
+  useEffect(() => {
     splitbee.init()
   }, [])
 
-  useEffect(() => {
-    console.log(stateLocation)
-  }, [stateLocation])
-
   return (
     <div className="App">
-    <InstantSearch searchClient={searchClient} indexName="BusinessesPage">
-    <Configure
-      hitsPerPage={10}
-      analytics={true}
-      analyticsTags={[`user:${userAuth.email}`,`category:${category}`,
-                      `country:${location.country}`, `state:${location.state}`,
-                      `city:${location.city}`, `locale:${locale}`]}
-      enablePersonalization={false}
-      distinct
-      clickAnalytics
-    />
-      <header className="App-header">
-        <Navigation></Navigation>
-      </header>
-      <div className="main">
-      <div style={{backgroundImage: `url("https://top10ezdevbucket221148-dev.s3.amazonaws.com/images/BBA476.max-800x600.jpg")`, backgroundRepeat: 'no-repeat',backgroundPosition: 'center center', backgroundSize: 'cover',  height: '45vh'}} className="city-image-banner bg-gray-400 w-full  bg-no-repeat bg-cover">
-      </div>
-      { pageLocation.pathname === '/' ? <div style={{backgroundImage: `url("${stateLocation?.cityImgUrl ?? 'https://top10ezdevbucket221148-dev.s3.amazonaws.com/images/BBA476.max-800x600.jpg'}")`, backgroundRepeat: 'no-repeat',backgroundPosition: 'center center', backgroundSize: 'cover',  height: '45vh'}} className="city-image-banner bg-gray-400 w-full h-72 bg-no-repeat bg-cover">
-      </div> : null } 
-      <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/search" element={<EzSearch />} />
-          <Route path="/business/:name" element={<Business />} />
-      </Routes>
-      </div>
+      <InstantSearch searchClient={searchClient} indexName="BusinessesPage">
+        <Configure
+          hitsPerPage={10}
+          analytics={true}
+          analyticsTags={[`user:${userAuth.email}`, `category:${category}`,
+          `country:${location.country}`, `state:${location.state}`,
+          `city:${location.city}`, `locale:${locale}`]}
+          enablePersonalization={false}
+          distinct
+          clickAnalytics
+        />
+        <header className="App-header">
+          <Navigation></Navigation>
+        </header>
+        <div className="main">
+          {/* <div style={{backgroundImage: `url("https://top10ezdevbucket221148-dev.s3.amazonaws.com/images/BBA476.max-800x600.jpg")`, backgroundRepeat: 'no-repeat',backgroundPosition: 'center center', backgroundSize: 'cover',  height: '45vh'}} className="city-image-banner bg-gray-400 w-full  bg-no-repeat bg-cover">
+      </div> */}
+          {pageLocation.pathname === '/' ? <div style={{ backgroundImage: `url("${stateLocation?.cityImgUrl ?? 'https://top10ezdevbucket221148-dev.s3.amazonaws.com/images/BBA476.max-800x600.jpg'}")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center center', backgroundSize: 'cover', height: '45vh' }} className="city-image-banner bg-gray-400 w-full h-72 bg-no-repeat bg-cover">
+          </div> : null}
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/search" element={<EzSearch />} />
+            <Route path="/business/:name" element={<Business />} />
+          </Routes>
+        </div>
       </InstantSearch>
       <VideoModal />
       <AlgoliaInsights searchClient={searchClient} />

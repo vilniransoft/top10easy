@@ -1,31 +1,38 @@
 
 
 const routes = [
-    {   label: 'Home',
+    {
+        label: 'Home',
         value: 'home',
         display: ['header, footer']
     },
-    {   label: 'About Us',
+    {
+        label: 'About Us',
         value: 'about',
         display: ['header, footer']
     },
-    {   label: 'Contact',
+    {
+        label: 'Contact',
         value: 'contact',
         display: ['header, footer']
     },
-    {   label: 'Submit Your Business',
+    {
+        label: 'Submit Your Business',
         value: 'submit',
         display: ['footer']
     },
-    {   label: 'Careers',
+    {
+        label: 'Careers',
         value: 'careers',
         display: ['footer']
     },
-    {   label: 'Terms and Conditions',
+    {
+        label: 'Terms and Conditions',
         value: 'terms',
         display: ['footer']
     },
-    {   label: 'Privacy',
+    {
+        label: 'Privacy',
         value: 'privacy',
         display: ['footer']
     },

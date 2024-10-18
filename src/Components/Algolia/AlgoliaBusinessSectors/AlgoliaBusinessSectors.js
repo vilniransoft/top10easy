@@ -1,31 +1,26 @@
-import {useEffect, useRef, useState} from 'react';
-import {Configure, InstantSearch, ToggleRefinement} from 'react-instantsearch-dom';
-import {useNavigate} from "react-router";
-import {useRecoilState, useRecoilValue} from "recoil";
-import {currentBussinessCategory, globalSearchFocusState, localeState} from "../../../context/appState";
+import { useEffect, useRef, useState } from 'react';
+import { Configure, InstantSearch, ToggleRefinement } from 'react-instantsearch-dom';
+import { useNavigate } from "react-router";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { currentBussinessCategory, globalSearchFocusState, localeState } from "../../../context/appState";
 import locales from "../../../locales/locales";
 import CustomAutocomplete from '../Autocomplete/Autocomplete';
 import algoliasearch from 'algoliasearch';
-import {useLoseFocus} from '../../../hooks/state';
+import { useLoseFocus } from '../../../hooks/state';
 
 const businessCategories = algoliasearch("CP26C79INL", "31c8c44b6cafedf9325e9c1748b215dc");
 
 const businessCategoryClient = {
-<<<<<<< HEAD
-    search(requests) {
-        console.log(requests)
-=======
-  search(requests){
-    console.log(requests,'requestsss')
->>>>>>> 187c1c724a3ca58e983bb50bf7df491b075be588
 
+    search(requests) {
+        console.log(requests, 'requestsss')
         let algoliaPromise = businessCategories.search(requests)
         return algoliaPromise
     }
 }
 export default function AlgoliaBusinessSectors(props) {
-<<<<<<< HEAD
     const currentLocale = useRecoilValue(localeState);
+    const [cityChangedFirst, setCityChangedFirst] = useState(false);
     const [localeText, setLocaleText] = useState(locales[currentLocale]?.value);
     const [category, setCategory] = useRecoilState(currentBussinessCategory);
     const [searchText, setSearchText] = useState(locales[currentLocale]?.utils?.search);
@@ -34,29 +29,16 @@ export default function AlgoliaBusinessSectors(props) {
     const [placeholder, setPlaceholder] = useState(locales[currentLocale]?.utils?.placeholder)
     const navigate = useNavigate();
     const elmRef = useRef(null);
-    const [hasFocus, setHasFocus] = useRecoilState(globalSearchFocusState)
-    const [cityChangedFirst, setCityChangedFirst] = useState(true)
+    const [hasFocus, setHasFocus] = useRecoilState(globalSearchFocusState);
     useLoseFocus(elmRef)
-=======
-  const currentLocale = useRecoilValue(localeState);
-  const [localeText, setLocaleText] = useState(locales[currentLocale]?.value);
-  const [category, setCategory] = useRecoilState(currentBussinessCategory);
-  const [searchText, setSearchText] = useState(locales[currentLocale]?.utils?.search);
-  const [showSuggestions, setShowSuggestions] = useState(false)
-  const [qryTerm, setQryTerm] = useState('');
-  const [placeholder, setPlaceholder] = useState(locales[currentLocale]?.utils?.placeholder)
-  const navigate = useNavigate();
-  const elmRef = useRef(null);
-  const [hasFocus, setHasFocus] = useRecoilState(globalSearchFocusState)
 
-  useEffect(()=>{
-    if(props?.optionSelected){
-      setHasFocus(true)
-    }else {setHasFocus(false)}
-  },[props?.optionSelected])
+    useEffect(() => {
+        if (props?.optionSelected) {
+            setHasFocus(true)
+        } else { setHasFocus(false) }
+    }, [props?.optionSelected])
 
-  useLoseFocus(elmRef)
->>>>>>> 187c1c724a3ca58e983bb50bf7df491b075be588
+    useLoseFocus(elmRef)
 
     useEffect(() => {
         setLocaleText(locales[currentLocale]?.value)
@@ -91,7 +73,7 @@ export default function AlgoliaBusinessSectors(props) {
         setHasFocus(true)
     }
 
-    return (<div style={{marginTop:'100px'}}><InstantSearch searchClient={businessCategoryClient} indexName="BusinessSectorPage">
+    return (<div style={{ marginTop: '100px' }}><InstantSearch searchClient={businessCategoryClient} indexName="BusinessSectorPage">
         <Configure
             hitsPerPage={25}
             analytics={true}
@@ -100,11 +82,11 @@ export default function AlgoliaBusinessSectors(props) {
             clickAnalytics={true}
         />
         <CustomAutocomplete elmRef={elmRef} hasFocus={hasFocus} handleFocus={handleFocus} placeholder={placeholder}
-                            btnText={searchText?.button}
-                            showSuggestions={showSuggestions} handleSearch={handleSearch} qryChange={qryChange}
-                            dropSelect={dropSelect}/>
+            btnText={searchText?.button}
+            showSuggestions={showSuggestions} handleSearch={handleSearch} qryChange={qryChange}
+            dropSelect={dropSelect} />
         <div className="hidden">
-            <ToggleRefinement attribute="_locale" label={localeText} value={localeText} defaultRefinement={localeText}/>
+            <ToggleRefinement attribute="_locale" label={localeText} value={localeText} defaultRefinement={localeText} />
         </div>
     </InstantSearch></div>)
 

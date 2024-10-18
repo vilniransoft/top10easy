@@ -8,12 +8,12 @@ const locales = {
             submitBis: 'Submit your business'
 
         },
-        home : {
-            h1Top : 'What Do',
+        home: {
+            h1Top: 'What Do',
             h1Bottom: 'You Want?'
         },
-        utils : {
-            search : {
+        utils: {
+            search: {
                 placeholder: '',
                 button: 'search'
             }
@@ -27,12 +27,12 @@ const locales = {
             contactUs: 'Contactez Nous',
             submitBis: 'Soumettre votre entreprise'
         },
-        home : {
-            h1Top : 'Que Cherchez',
+        home: {
+            h1Top: 'Que Cherchez',
             h1Bottom: 'Vous?'
         },
-        utils : {
-            search : {
+        utils: {
+            search: {
                 placeholder: '',
                 button: 'chercher'
             }

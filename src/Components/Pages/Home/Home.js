@@ -7,10 +7,10 @@ import { localeState } from "../../../context/appState";
 import AlgoliaBusinessSectors from "../../Algolia/AlgoliaBusinessSectors/AlgoliaBusinessSectors";
 import "./Home.css";
 
-export default function Home(){
+export default function Home() {
     const currentLocale = useRecoilValue(localeState)
     const [homeText, setHomeText] = useState(locales[currentLocale]?.home)
-    const [optionSelected , setOptionSelected] = useState({})
+    const [optionSelected, setOptionSelected] = useState({})
 
     useEffect(() => {
         setHomeText(locales[currentLocale]?.home)
@@ -18,7 +18,7 @@ export default function Home(){
 
 
 
-    return  <section className="w-full px-2 antialiased bg-white">
+    return <section className="w-full px-2 antialiased bg-white">
         <EzInstallPrompt />
         <div className="mx-auto max-w-7xl">
             <div className="container max-w-lg py-3 mx-auto text-left md:max-w-none md:text-center">

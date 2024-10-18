@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { localeState, userLoginState } from "../../../context/appState";
 import locales from "../../../locales/locales";
-import GoogleLogin from '../../Utils/GoogleLogin/GoogleLogin';
-import GoogleLogout from '../../Utils/GoogleLogout/GoogleLogout';
-export default function Footer(){
+// import GoogleLogin from '../../Utils/GoogleLogin/GoogleLogin';
+// import GoogleLogout from '../../Utils/GoogleLogout/GoogleLogout';
+export default function Footer() {
     const currentLocale = useRecoilValue(localeState)
     const userAuth = useRecoilValue(userLoginState)
     const [labels, setLabels] = useState(locales[currentLocale]?.navigationLabels)
@@ -17,21 +17,21 @@ export default function Footer(){
 
     useEffect(() => {
 
-    },[userAuth])
-    
-    return  <section style={{marginTop: '70px'}} className="bg-white ">
-            {(!userAuth.authenticated) ? <GoogleLogin clientId='755311199624-tghah0qnsk7aqk44d8q90ivk3uhmc680.apps.googleusercontent.com' /> 
-                                        : <GoogleLogout clientId='755311199624-tghah0qnsk7aqk44d8q90ivk3uhmc680.apps.googleusercontent.com'/>}
+    }, [userAuth])
+
+    return <section style={{ marginTop: '70px' }} className="bg-white ">
+        {/* {(!userAuth.authenticated) ? <GoogleLogin clientId='755311199624-tghah0qnsk7aqk44d8q90ivk3uhmc680.apps.googleusercontent.com' />
+            : <GoogleLogout clientId='755311199624-tghah0qnsk7aqk44d8q90ivk3uhmc680.apps.googleusercontent.com' />}
         <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8 flex flex-col align-center">
-        <img src={logo} alt="Top10easy" className="w-24 self-center"/>
+            <img src={logo} alt="Top10easy" className="w-24 self-center" />
             <nav className="flex flex-wrap justify-center -mx-5 -my-2">
-            <div className="px-5 py-2" >
+                <div className="px-5 py-2" >
                     <Link to="/" className="text-base leading-6 text-gray-500 hover:text-gray-900">
                         Home
                     </Link>
                 </div>
                 <div className="px-5 py-2">
-                    <Link to="/about"  className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                    <Link to="/about" className="text-base leading-6 text-gray-500 hover:text-gray-900">
                         About Us
                     </Link>
                 </div>
@@ -55,9 +55,6 @@ export default function Footer(){
                         Privacy
                     </Link>
                 </div>
-                <Link to="/contact" className="bottom-0 mb-2 bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent flex-nowrap rounded-lg">
-                    {labels?.submitBis}
-                </Link>
             </nav>
             <div className="flex justify-center mt-8 space-x-6">
                 <Link to="/#" className="text-gray-400 hover:text-gray-500">
@@ -79,12 +76,12 @@ export default function Footer(){
                     </svg>
                 </Link>
 
-              
+
             </div>
             <p className="mt-8 text-base leading-6 text-center text-gray-400">
                 © 2021 Top10easy, Inc. All rights reserved.
             </p>
-        </div>
+        </div> */}
     </section>
-    
+
 }
