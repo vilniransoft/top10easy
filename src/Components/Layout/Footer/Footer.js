@@ -46,12 +46,12 @@ export default function Footer() {
                     </Link>
                 </div>
                 <div className="px-5 py-2">
-                    <Link to="/terms" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                    <Link to="/terms-and-condition" className="text-base leading-6 text-gray-500 hover:text-gray-900">
                         Terms and Conditions
                     </Link>
                 </div>
                 <div className="px-5 py-2">
-                    <Link to="/privacy" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                    <Link to="/privacy-policy" className="text-base leading-6 text-gray-500 hover:text-gray-900">
                         Privacy
                     </Link>
                 </div>

@@ -28,12 +28,12 @@ const routes = [
     },
     {
         label: 'Terms and Conditions',
-        value: 'terms',
+        value: 'terms-and-conditions',
         display: ['footer']
     },
     {
         label: 'Privacy',
-        value: 'privacy',
+        value: 'privacy-policy',
         display: ['footer']
     },
 ]

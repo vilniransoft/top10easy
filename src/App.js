@@ -67,11 +67,11 @@ function App() {
               <Route exact path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/careers" element={<Careers />} />
-              <Route path="/terms" element={<Terms />} />
+              <Route path="/terms-and-condition" element={<Terms />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/privacy-policy" element={<Privacy />} />
               <Route path="/search" element={<EzSearch />} />
-              <Route path="/ns-test" element={<NsTest />} />
+              <Route path="/search-results" element={<NsTest />} />
               <Route path="/business/:name" element={<Business />} />
             </Routes>
           </div>

@@ -76,9 +76,9 @@ export default function Home() {
 
         // Navigate to the destination with the query string
         if (searchValue?.length > 0) {
-            navigate(`/ns-test?query=${searchValue}&${queryString}`);
+            navigate(`/search-results?query=${searchValue}&${queryString}`);
         } else {
-            navigate(`/ns-test?${queryString}`);
+            navigate(`/search-results?${queryString}`);
         }
     };
 

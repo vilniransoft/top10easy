@@ -99,7 +99,7 @@ export default function NsTest() {
   const handleClearFilters = () => {
     // Reset filters to their initial state
     // Clear the URL query parameters by navigating to the base route
-    navigate('/ns-test');
+    navigate('/search-results');
   };
 
   const [isResult, setIsResult] = useState(true);

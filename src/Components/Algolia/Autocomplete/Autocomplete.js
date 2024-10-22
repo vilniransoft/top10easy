@@ -45,7 +45,7 @@ const Autocomplete = ({ elmRef, hasFocus, qryChange, dropSelect, handleSearch, h
         }
       </div>
 
-      <button onClick={() => navigate("/ns-test")} className="w-full md:w-[calc(25%-12px)] min-w-24 shrink-0 bg-green-500 hover:bg-green-700 text-white font-bold leading-none py-3 px-4 flex items-center justify-center gap-2 capitalize border-2 border-green-500 hover:border-green-700 rounded-lg transition-all" name="submit"
+      <button onClick={() => navigate("/search-results")} className="w-full md:w-[calc(25%-12px)] min-w-24 shrink-0 bg-green-500 hover:bg-green-700 text-white font-bold leading-none py-3 px-4 flex items-center justify-center gap-2 capitalize border-2 border-green-500 hover:border-green-700 rounded-lg transition-all" name="submit"
         // onClick={(e) => handleSearch(e)}
         onFocus={() => handleFocus()}>
         <i className="text-white">
