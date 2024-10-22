@@ -37,7 +37,6 @@ export default function EzSSearch({ searchClient }) {
                 {filterAttr.map(attr => {
                     return <StatefullFacets field={attr.value} key={attr.value} searchable={attr.searchable} label={attr.label} />
                 })}
-
             </div>
             <div className="result-list-container w-full sm:w-3/4">
                 {(viewType === 'list') ? <StatefulResultsPage /> : <StatefulGeoResultsPage />}

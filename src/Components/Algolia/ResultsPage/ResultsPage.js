@@ -20,6 +20,7 @@ export default function ResultsPage({ props, searchResults }) {
 
   return <div className="container">
     <div className="search-panel">
+
       <div className="search-panel__results">
         {
           (hasResults) ? <Hits hitComponent={AlgoliaCard} /> : <CustomStateResults />

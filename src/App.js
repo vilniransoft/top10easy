@@ -18,6 +18,10 @@ import VideoModal from './Components/Utils/VideoModal/VideoModal';
 import AlgoliaInsights from './Components/Algolia/AlgoliaInsights/AlgoliaInsights';
 import { useRecoilValue } from 'recoil';
 import { currentBussinessCategory, localeState, searchLocationState, userLoginState } from './context/appState';
+import NsTest from './pages/NsTest';
+import Terms from './Components/Pages/Terms/Terms';
+import Careers from './Components/Pages/Careers/Careers';
+import Providers from './utils/Provider';
 
 const searchClient = algoliasearch("CP26C79INL", "31c8c44b6cafedf9325e9c1748b215dc");
 
@@ -39,40 +43,45 @@ function App() {
 
   return (
     <div className="App">
-      <InstantSearch searchClient={searchClient} indexName="BusinessesPage">
-        <Configure
-          hitsPerPage={10}
-          analytics={true}
-          analyticsTags={[`user:${userAuth.email}`, `category:${category}`,
-          `country:${location.country}`, `state:${location.state}`,
-          `city:${location.city}`, `locale:${locale}`]}
-          enablePersonalization={false}
-          distinct
-          clickAnalytics
-        />
-        <header className="App-header">
-          <Navigation></Navigation>
-        </header>
-        <div className="main">
-          {/* <div style={{backgroundImage: `url("https://top10ezdevbucket221148-dev.s3.amazonaws.com/images/BBA476.max-800x600.jpg")`, backgroundRepeat: 'no-repeat',backgroundPosition: 'center center', backgroundSize: 'cover',  height: '45vh'}} className="city-image-banner bg-gray-400 w-full  bg-no-repeat bg-cover">
+      <Providers>
+        <InstantSearch searchClient={searchClient} indexName="BusinessesPage">
+          <Configure
+            hitsPerPage={10}
+            analytics={true}
+            analyticsTags={[`user:${userAuth.email}`, `category:${category}`,
+            `country:${location.country}`, `state:${location.state}`,
+            `city:${location.city}`, `locale:${locale}`]}
+            enablePersonalization={false}
+            distinct
+            clickAnalytics
+          />
+          <header className="App-header">
+            <Navigation></Navigation>
+          </header>
+          <div className="main">
+            {/* <div style={{backgroundImage: `url("https://top10ezdevbucket221148-dev.s3.amazonaws.com/images/BBA476.max-800x600.jpg")`, backgroundRepeat: 'no-repeat',backgroundPosition: 'center center', backgroundSize: 'cover',  height: '45vh'}} className="city-image-banner bg-gray-400 w-full  bg-no-repeat bg-cover">
       </div> */}
-          {pageLocation.pathname === '/' ? <div style={{ backgroundImage: `url("${stateLocation?.cityImgUrl ?? 'https://top10ezdevbucket221148-dev.s3.amazonaws.com/images/BBA476.max-800x600.jpg'}")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center center', backgroundSize: 'cover', height: '45vh' }} className="city-image-banner bg-gray-400 w-full h-72 bg-no-repeat bg-cover">
-          </div> : null}
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/search" element={<EzSearch />} />
-            <Route path="/business/:name" element={<Business />} />
-          </Routes>
-        </div>
-      </InstantSearch>
-      <VideoModal />
-      <AlgoliaInsights searchClient={searchClient} />
-      <footer className="bottom-0 w-full">
-        <Footer></Footer>
-      </footer>
+            {pageLocation.pathname === '/' ? <div style={{ backgroundImage: `url("${stateLocation?.cityImgUrl ?? 'https://top10ezdevbucket221148-dev.s3.amazonaws.com/images/BBA476.max-800x600.jpg'}")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center center', backgroundSize: 'cover', height: '45vh' }} className="city-image-banner bg-gray-400 w-full h-72 bg-no-repeat bg-cover">
+            </div> : null}
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/search" element={<EzSearch />} />
+              <Route path="/ns-test" element={<NsTest />} />
+              <Route path="/business/:name" element={<Business />} />
+            </Routes>
+          </div>
+        </InstantSearch>
+        <VideoModal />
+        <AlgoliaInsights searchClient={searchClient} />
+        <footer className="bottom-0 w-full">
+          <Footer></Footer>
+        </footer>
+      </Providers>
     </div>
   );
 }

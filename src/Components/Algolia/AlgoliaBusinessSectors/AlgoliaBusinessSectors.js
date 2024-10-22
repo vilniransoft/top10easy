@@ -11,16 +11,13 @@ import { useLoseFocus } from '../../../hooks/state';
 const businessCategories = algoliasearch("CP26C79INL", "31c8c44b6cafedf9325e9c1748b215dc");
 
 const businessCategoryClient = {
-
     search(requests) {
-        console.log(requests, 'requestsss')
         let algoliaPromise = businessCategories.search(requests)
         return algoliaPromise
     }
 }
 export default function AlgoliaBusinessSectors(props) {
     const currentLocale = useRecoilValue(localeState);
-    const [cityChangedFirst, setCityChangedFirst] = useState(false);
     const [localeText, setLocaleText] = useState(locales[currentLocale]?.value);
     const [category, setCategory] = useRecoilState(currentBussinessCategory);
     const [searchText, setSearchText] = useState(locales[currentLocale]?.utils?.search);
@@ -29,8 +26,8 @@ export default function AlgoliaBusinessSectors(props) {
     const [placeholder, setPlaceholder] = useState(locales[currentLocale]?.utils?.placeholder)
     const navigate = useNavigate();
     const elmRef = useRef(null);
-    const [hasFocus, setHasFocus] = useRecoilState(globalSearchFocusState);
-    useLoseFocus(elmRef)
+    const [hasFocus, setHasFocus] = useRecoilState(globalSearchFocusState)
+    const [cityChangedFirst, setCityChangedFirst] = useState()
 
     useEffect(() => {
         if (props?.optionSelected) {
@@ -73,7 +70,7 @@ export default function AlgoliaBusinessSectors(props) {
         setHasFocus(true)
     }
 
-    return (<div style={{ marginTop: '100px' }}><InstantSearch searchClient={businessCategoryClient} indexName="BusinessSectorPage">
+    return (<div className="w-full mt-4"><InstantSearch searchClient={businessCategoryClient} indexName="BusinessSectorPage">
         <Configure
             hitsPerPage={25}
             analytics={true}

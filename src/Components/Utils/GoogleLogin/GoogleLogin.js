@@ -4,39 +4,39 @@ import { userLoginState } from '../../../context/appState';
 import { refreshTokenSetup } from '../RefreshToken/RefreshToken';
 
 export default function GoogleLogin({ clientId }) {
-    const [loggedUser, setLoggedUser] = useRecoilState(userLoginState)
-    const onSuccess = (res) => {
-        console.log('Login Success: currentUser:', res.profileObj);
-        setLoggedUser( {
-            authenticated: true,
-            username: res.profileObj.email,
-            email: res.profileObj.email,
-            name:  res.profileObj.name,
-            token: ''
-        })
-        console.log(
-          `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`
-        );
-        //refreshTokenSetup(res);
-      };
-    
-      const onFailure = (res) => {
-        console.log('Login failed: res:', res);
-      };
-    
-      // const {signIn} = useGoogleLogin({
-      //   onSuccess,
-      //   onFailure,
-      //   clientId,
-      //   isSignedIn: true,
-      //   accessType: 'offline',
-      //   // responseType: 'code',
-      //   // prompt: 'consent',
-      // });
-    
-      return (
-          <div className="shadow-md w-48 rounded-md fixed bottom-0 left-0 mb-6 ml-6 bg-white">
-            {/* <button onClick={() => signIn() } className="button flex items-center">
+  const [loggedUser, setLoggedUser] = useRecoilState(userLoginState)
+  const onSuccess = (res) => {
+    console.log('Login Success: currentUser:', res.profileObj);
+    setLoggedUser({
+      authenticated: true,
+      username: res.profileObj.email,
+      email: res.profileObj.email,
+      name: res.profileObj.name,
+      token: ''
+    })
+    console.log(
+      `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`
+    );
+    //refreshTokenSetup(res);
+  };
+
+  const onFailure = (res) => {
+    console.log('Login failed: res:', res);
+  };
+
+  // const {signIn} = useGoogleLogin({
+  //   onSuccess,
+  //   onFailure,
+  //   clientId,
+  //   isSignedIn: true,
+  //   accessType: 'offline',
+  //   // responseType: 'code',
+  //   // prompt: 'consent',
+  // });
+
+  return (
+    <div className="shadow-md w-48 rounded-md fixed bottom-0 left-0 mb-6 ml-6 bg-white">
+      {/* <button onClick={() => signIn() } className="button flex items-center">
             <div>
                 <svg 
                     className="centerHV" 
@@ -66,6 +66,6 @@ export default function GoogleLogin({ clientId }) {
             </div>
             <span className="buttonText">Sign in with Google</span>
             </button> */}
-        </div>
-      );
-    }
+    </div>
+  );
+}
